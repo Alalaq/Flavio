@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resview - Sign In</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <script defer src="../static/main.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="homepage.html">Resview</a></h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="signup.html">Sign up</a></li>
+            <li><a class="active" href="signin.html">Sign in</a></li>
+            <li><a href="restaurants.html">Restaurants</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="signin-container">
+        <h2>Sign In</h2>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+</main>
+<footer>
+    <div class="footer">
+        <p class="text-muted text-center mb-0" align="center">&copy; 2023 Resview. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
