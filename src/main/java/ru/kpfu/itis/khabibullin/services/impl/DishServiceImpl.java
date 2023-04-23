@@ -34,7 +34,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishDto> getDishesByPriceRange(Integer minPrice, Integer maxPrice) {
         return DishDto.from(dishRepository.findDishesByPriceBetween(minPrice, maxPrice));
-    }//TODO: maybe I need to return the added entity?...
+    }
     @Override
     public void saveDish(DishDto dish) {
         dishRepository.save(DishDto.to(dish));

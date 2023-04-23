@@ -1,54 +1,104 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Resview - Restaurants</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../static/main.js"></script>
+    <script defer src="../static/restaurant.js"></script>
 </head>
 <body>
 <header>
     <div class="logo">
-        <h1><a class="logoLink" href="homepage.html">Resview</a></h1>
+        <h1><a class="logoLink" href="/homepage">Resview</a></h1>
     </div>
     <nav>
         <ul>
-            <li><a href="signup.html">Sign up</a></li>
-            <li><a href="signin.html">Sign in</a></li>
-            <li><a href="restaurants.html">Restaurants</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img src="avatar.jpg" alt="Profile"/></a></li>
         </ul>
     </nav>
 </header>
 <main>
-    <div class="recent-activity">
-        <h2>Recent Activity</h2>
-        <div class="recent-reviews">
-            <div class="review">
-                <img src="https://eda.yandex.ru/images/3534679/1564f7c5ef3ce4660dcf9e742d605a0e-450x300.jpg" alt="Restaurant 1">
-                <h3>Restaurant 1</h3>
-                <h4>Author 1</h4>
-                <br>
-                <p>Great burger and fries!</p>
-            </div>
-            <div class="review">
-                <img src="https://eda.yandex.ru/images/1368744/7255046d3da482bff03b125e67d23bb6-450x300.jpg" alt="Restaurant 2">
-                <h3>Restaurant 2</h3>
-                <h4>Author 2</h4>
-                <br>
-                <p>Delicious pizza!</p>
-            </div>
-            <div class="review">
-                <img src="https://eda.yandex.ru/images/3512182/832aa28e05f0a14a1f16fb99e4468cee-450x300.jpg" alt="Restaurant 3">
-                <h3>Restaurant 3</h3>
-                <h4>Author 3</h4>
-                <br>
-                <p>Amazing sushi!</p>
+
+    <div class="restaurant-filters">
+        <button id="filterButton" class="btn-secondary">Filters</button>
+        <div id="filterOptions" class="filter-options" style="display: none">
+            <h3>Filter Options</h3>
+            <form action="/restaurants" method="get" class="filter-options">
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" multiple>
+                        <option value="" selected>Any</option>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cuisine">Cuisine:</label>
+                    <select id="cuisine" name="cuisine" multiple>
+                        <option value=""  selected>Any</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="American">American</option>
+                        <option value="French">French</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Georgian">Georgian</option>
+                        <option value="Russian">Russian</option>
+                        <option value="Korean">Korean</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="distance">Distance:</label>
+                    <select id="distance" name="distance" multiple>
+                        <option value=""  selected>Any</option>
+                        <option value="1">Less than 1 km</option>
+                        <option value="5">Less than 5 km</option>
+                        <option value="10">Less than 10 km</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <select id="price" name="price" multiple>
+                        <option value="" selected>Any</option>
+                        <option value="1">$</option>
+                        <option value="2">$$</option>
+                        <option value="3">$$$</option>
+                    </select>
+                </div>
+                <div class="form-group" th:method="get">
+                    <button type="submit" class="btn-primary">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="restaurant-list">
+        <h2>Restaurants</h2>
+        <div class="restaurant-list">
+            <div th:each="restaurant : ${restaurants}">
+                <div class="restaurant">
+                    <h3><a th:href="@{/restaurants/{id}(id=${restaurant.id})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
+                    <p><strong>Rating:</strong> <span th:text="${restaurant.getGeneralRating()}"></span></p>
+                    <p><strong>Cuisines Rating:</strong> <span th:text="${restaurant.getCuisineRatings()}"></span></p>
+                    <p><strong>Address:</strong> <span th:text="${restaurant.getAddress()}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${restaurant.getDescription()}"></span></p>
+                    <p><strong>Price:</strong> <span th:text="${restaurant.price}"></span></p>
+                </div>
             </div>
         </div>
     </div>
+
 </main>
-<footer class="footer">
+
+<div class="footer">
     <p class="text-muted text-center mb-0" align="center">&copy; 2023 Resview. All rights reserved.</p>
-</footer>
+</div>
 </body>
 </html>

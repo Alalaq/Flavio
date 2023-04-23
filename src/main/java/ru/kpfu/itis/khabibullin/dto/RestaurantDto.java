@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.utils.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.Price;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class RestaurantDto {
     private Long id;
     private String name;
     private Map<Cuisine, Double> cuisineRatings;
+    private Double generalRating;
+    private Price price;
     private String address;
     private String description;
     private List<DishDto> dishes;
@@ -48,6 +51,8 @@ public class RestaurantDto {
                 .id(restaurant.getId())
                 .name(restaurant.getName())
                 .cuisineRatings(restaurant.getCuisineRatings())
+                .generalRating(restaurant.getGeneralRating())
+                .price(restaurant.getPrice())
                 .address(restaurant.getAddress())
                 .description(restaurant.getDescription())
                 .dishes(DishDto.from(restaurant.getDishes()))

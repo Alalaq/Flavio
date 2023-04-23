@@ -7,8 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.utils.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.Price;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
@@ -25,6 +29,13 @@ public class Restaurant {
     @Column(name = "name", nullable = false)
     @NotBlank(message = "Name is required")
     private String name;
+
+    @Column(name = "general_rating", columnDefinition = "numeric(5,2)")
+    private Double generalRating;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "price")
+    private Price price;
 
     //Represents what exact cuisines dishes this restaurant cooks and rating for each cuisine
     @ElementCollection

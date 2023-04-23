@@ -7,8 +7,11 @@ import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.repositories.RestaurantsRepository;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
+import ru.kpfu.itis.khabibullin.utils.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.Price;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +21,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<RestaurantDto> getAllRestaurants() {
         return RestaurantDto.from(restaurantsRepository.findAll());
+    }
+
+    @Override
+    public List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address) {
+        return RestaurantDto.from(restaurantsRepository.findByFilters(cuisines, price, distance, address));
     }
 
     @Override
@@ -32,7 +40,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void editRestaurant(Long id, RestaurantDto restaurant) {
-        Restaurant existingRestaurant = restaurantsRepository.findRestaurantById(id);
+        Restaurant existingRestaurant = restaurantsRepository.findRestaurantById(id).orElseThrow(() -> new NotFoundException("Restaurant with id: <" + restaurant.getId() + "> not found"));
         existingRestaurant.setName(restaurant.getName());
         existingRestaurant.setDescription(restaurant.getDescription());
         existingRestaurant.setAddress(restaurant.getAddress());

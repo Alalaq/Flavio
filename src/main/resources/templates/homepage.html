@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Resview</title>
-    <link rel="stylesheet" href="../static/styles.css">
-    <script defer src = "../static/main.js"></script>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/main.js"></script>
 </head>
 <body>
 <header>
     <div class="logo">
-        <h1><a class="logoLink" href="homepage.html">Resview</a> </h1>
+        <h1><a class="logoLink" href="/homepage">Resview</a></h1>
     </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..." />
     <nav>
         <ul>
-            <li><a href="signup.html">Sign up</a></li>
-            <li><a href="signin.html">Sign in</a></li>
-            <li><a href="restaurants.html">Restaurants</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img src="avatar.jpg" alt="Profile"/></a></li>
         </ul>
     </nav>
 </header>
 <main>
-    <div class="recent-activity">
+    <div th:action="@{/homepage}" class="recent-activity">
         <h2>Recent Activity</h2>
         <div class="recent-reviews">
             <div class="review">

@@ -5,11 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomePageController {
-
-    @GetMapping({"/", "/homepage"})
-    public String home(Model model) {
-        return "homepage";
+public class MyProfileController {
+    @GetMapping({"/profile", "/profile.html"})
+    public String profile(Model model) {
+        return "profile";
     }
-
 }
