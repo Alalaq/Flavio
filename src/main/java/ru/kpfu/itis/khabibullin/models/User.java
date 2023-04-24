@@ -1,7 +1,6 @@
 package ru.kpfu.itis.khabibullin.models;
 
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -41,7 +40,7 @@ public class User {
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be a valid email address")
     private String email;
-
+    
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
@@ -49,7 +48,6 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "state_of_user", nullable = false)
     private State state;
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();

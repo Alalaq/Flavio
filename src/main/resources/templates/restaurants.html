@@ -13,6 +13,14 @@
     <div class="logo">
         <h1><a class="logoLink" href="/homepage">Resview</a></h1>
     </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..." />
+    <label for="address-dropdown"></label>
+    <select id="address-dropdown">
+        <option value="saved-addresses">Saved Addresses</option>
+        <option value="new-address">New Address +</option>
+    </select>
+
+
     <nav>
         <ul>
             <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
@@ -31,7 +39,7 @@
             <form action="/restaurants" method="get" class="filter-options">
                 <div class="form-group">
                     <label for="rating">Rating:</label>
-                    <select id="rating" name="rating" multiple>
+                    <select id="rating" name="rating">
                         <option value="" selected>Any</option>
                         <option value="1">1 Star</option>
                         <option value="2">2 Stars</option>
@@ -68,13 +76,13 @@
                     <label for="price">Price:</label>
                     <select id="price" name="price" multiple>
                         <option value="" selected>Any</option>
-                        <option value="1">$</option>
-                        <option value="2">$$</option>
-                        <option value="3">$$$</option>
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
                     </select>
                 </div>
-                <div class="form-group" th:method="get">
-                    <button type="submit" class="btn-primary">Filter</button>
+                <div class="form-group" th:method="post">
+                    <button type="submit" class="btn-primary" onclick="redirectToFiltered()">Filter</button>
                 </div>
             </form>
         </div>

@@ -20,14 +20,6 @@ public class SpringBootRestApiProjectApplication {
 		return new ObjectMapper();
 	}
 
-//	@Bean
-//	public CommandLineRunner run(DataSource dataSource) {
-//		return args -> {
-//			Resource resource = new ClassPathResource("/sql/data.sql");
-//			ScriptUtils.executeSqlScript(dataSource.getConnection(), resource);
-//		};
-//	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootRestApiProjectApplication.class, args);
 	}

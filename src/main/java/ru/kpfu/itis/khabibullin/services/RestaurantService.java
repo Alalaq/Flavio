@@ -10,7 +10,7 @@ import java.util.Set;
 public interface RestaurantService {
     List<RestaurantDto> getAllRestaurants();
 
-    List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address);
+    List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating);
 
     RestaurantDto getRestaurantById(Long id);
 

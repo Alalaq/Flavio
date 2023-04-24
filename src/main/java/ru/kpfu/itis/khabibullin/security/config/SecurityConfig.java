@@ -32,10 +32,10 @@ public class SecurityConfig {
         return
                 http
                 .authorizeHttpRequests()
-//                        .anyRequest().permitAll()
-                .requestMatchers("/homepage", "/login", "/registration", "/restaurants").permitAll()
-                .requestMatchers("/profile").hasAnyAuthority("ADMIN", "USER")
-                .requestMatchers("/users").hasAuthority("ADMIN")
+                        .anyRequest().permitAll()
+//                .requestMatchers("/homepage", "/login", "/registration", "/restaurants").permitAll()
+//                .requestMatchers("/profile").hasAnyAuthority("ADMIN", "USER")
+//                .requestMatchers("/users").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                 .and().build();
     }

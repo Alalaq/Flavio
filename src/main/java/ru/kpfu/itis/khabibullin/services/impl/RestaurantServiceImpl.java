@@ -24,8 +24,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address) {
-        return RestaurantDto.from(restaurantsRepository.findByFilters(cuisines, price, distance, address));
+    public List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating) {
+        return RestaurantDto.from(restaurantsRepository.findByFilters(cuisines, price, distance, address, rating));
     }
 
     @Override

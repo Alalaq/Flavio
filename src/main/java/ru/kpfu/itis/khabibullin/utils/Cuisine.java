@@ -1,16 +1,16 @@
 package ru.kpfu.itis.khabibullin.utils;
 
 public enum Cuisine {
-    AMERICAN("American"),
-    CHINESE("Chinese"),
-    FRENCH("French"),
-    INDIAN("Indian"),
-    ITALIAN("Italian"),
-    JAPANESE("Japanese"),
-    KOREAN("Korean"),
-    MEXICAN("Mexican"),
-    GEORGIAN("Georgian"),
-    RUSSIAN("Russian");
+    AMERICAN("AMERICAN"),
+    CHINESE("CHINESE"),
+    FRENCH("FRENCH"),
+    INDIAN("INDIAN"),
+    ITALIAN("ITALIAN"),
+    JAPANESE("JAPANESE"),
+    KOREAN("KOREAN"),
+    MEXICAN("MEXICAN"),
+    GEORGIAN("GEORGIAN"),
+    RUSSIAN("RUSSIAN");
 
     private final String name;
 

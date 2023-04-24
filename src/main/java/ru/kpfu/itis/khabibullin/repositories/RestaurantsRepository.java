@@ -15,25 +15,36 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findRestaurantById(Long id);
 
 
-    default List<Restaurant> findByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address) {
+    default List<Restaurant> findByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating) {
         List<Restaurant> restaurants = findAll();
-        if (cuisines.isEmpty() && price.isEmpty() && distance == null && address == null) {
+        if (cuisines.isEmpty() && price.isEmpty() && distance == null && address == null && rating == null) {
             return restaurants;
         } else {
             List<Restaurant> filteredRestaurants = new ArrayList<>();
             for (Restaurant restaurant : restaurants) {
                 boolean addRestaurant = true;
                 if (!cuisines.isEmpty()) {
-                    if (!cuisines.containsAll(restaurant.getCuisineRatings().keySet())){
-                        addRestaurant = false;
+                    if (cuisines.size() > restaurant.getCuisineRatings().keySet().size()){
+                        if (!cuisines.containsAll(restaurant.getCuisineRatings().keySet())) {
+                            addRestaurant = false;
+                        }
+                    } else {
+                        if (!restaurant.getCuisineRatings().keySet().containsAll(cuisines)) {
+                            addRestaurant = false;
+                        }
                     }
                 }
-                if (!(price.isEmpty() && price.contains(restaurant.getPrice()))) {
+                if ((!price.isEmpty() && !price.contains(restaurant.getPrice()))) {
                     addRestaurant = false;
                 }
                 if (address != null && distance != null) {
                     double dist = AddressUtil.calculateDistance(address, restaurant.getAddress());
                     if (dist > distance) {
+                        addRestaurant = false;
+                    }
+                }
+                if (rating != null){
+                    if (restaurant.getGeneralRating() < rating){
                         addRestaurant = false;
                     }
                 }

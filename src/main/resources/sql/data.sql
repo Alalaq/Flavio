@@ -8,6 +8,8 @@ VALUES
     ('Mamma Mia', null, '$$', 'Novosibirsk, Lenina st. 2', 'Mamma Mia is an Italian restaurant that also serves American and Mexican cuisine. The menu includes a variety of pizzas, pastas, and burgers.'),
     ('The Golden Phoenix', null, '$$$', 'Samara, Leningradskaya st. 10', 'The Golden Phoenix is a Chinese restaurant that also serves Japanese and Korean cuisine. The menu includes a variety of dim sum, sushi, and Korean barbecue.');
 
+
+
 CREATE OR REPLACE FUNCTION update_restaurant_rating()
     RETURNS TRIGGER AS $$
 BEGIN

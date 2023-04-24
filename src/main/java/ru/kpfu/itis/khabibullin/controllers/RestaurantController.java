@@ -13,6 +13,7 @@ import ru.kpfu.itis.khabibullin.utils.Price;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -29,14 +30,21 @@ public class RestaurantController {
         return "restaurants";
     }
 
-    @GetMapping(params = {"address", "cuisine", "distance", "price"})
-    public String getRestaurantsWithFilters(@RequestParam(value = "address", required = false) String address,
-                                            @RequestParam(value = "cuisine", required = false) Set<Cuisine> cuisines,
+    @RequestMapping("/filtered")
+    public String getRestaurantsWithFilters(@RequestParam(value = "rating", required = false) Double rating,
+                                            @RequestParam(value = "cuisine", required = false) List<String> cuisines,
+                                            @RequestParam(value = "price", required = false) List<String> prices,
                                             @RequestParam(value = "distance", required = false) Integer distance,
-                                            @RequestParam(value = "price", required = false) Set<Price> price,
-                                            Model model){
-        List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisines, price, distance, address);
+                                            Model model) {
+
+        Set<Cuisine> cuisineSet = cuisines != null ? cuisines.stream().map(Cuisine::valueOf).collect(Collectors.toSet()) : null;
+        Set<Price> priceSet = prices != null ? prices.stream().map(Price::valueOf).collect(Collectors.toSet()) : null;
+        System.out.println("rating: " + rating + " cuisinesenes:" + cuisineSet + " prces: " + priceSet + " distance: " + distance);
+        List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisineSet, priceSet, distance,"Kazan", rating);
+        System.out.println(restaurants);
         model.addAttribute("restaurants", restaurants);
+
         return "restaurants";
     }
+
 }
