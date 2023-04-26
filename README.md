@@ -1,6 +1,6 @@
 # Flavio
 
-This is a service that allows users to order from various restaurants and leave reviews not only for the restaurant itself but for each dish separately.
+### This is a service that allows users to order from various restaurants and leave reviews not only for the restaurant itself but for each dish separately. What does it mean?  Have you ever had a feeling that you see a restaurant with a high rating and a large number of cuisines to choose from, and you did not understand why this good rating? I had one too.  Thanks to my service, now there will be no such problem. You will know in advance that the pizza in this restaurant is good, and the sushi is quite mediocre.
 
 ![Project Image](https://sun9-78.userapi.com/impg/6Y5Whn6jlm2owflh-mOgEiZ0o_BID9euQgbNWQ/Sa-WFuY0Yp8.jpg?size=1072x468&quality=96&sign=80abffb539c4b7f9617fb79914eb2c6f&type=album)
 
