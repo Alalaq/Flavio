@@ -34,8 +34,9 @@ public class SecurityConfig {
                 http
                         .csrf().disable()
                         .authorizeHttpRequests()
+                        .requestMatchers("/auth/check-authentication").permitAll()
                         //.anyRequest().permitAll()
-                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants").permitAll()
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**").permitAll()
                         .requestMatchers("/profile/**").authenticated()
                         .requestMatchers("/users").hasAuthority("ADMIN")
                         .requestMatchers("/addresses/**").permitAll()

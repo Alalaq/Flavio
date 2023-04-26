@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.controllers;
+package ru.kpfu.itis.khabibullin.controllers.REST;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
@@ -32,8 +32,8 @@ public class UserAddressController {
     }
 
     @DeleteMapping("/addresses/delete")
-    public void deleteAdressById(@RequestParam(name = "address_id") Long addressId,
-                                 Principal principal) {
+    public void deleteAddressById(@RequestParam(name = "address_id") Long addressId,
+                                  Principal principal) {
         UserDto user = userService.getUserByEmail(principal.getName());
         Long currentUserId = user.getId();
 

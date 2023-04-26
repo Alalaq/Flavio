@@ -9,9 +9,6 @@ filterButton.addEventListener("click", () => {
     }
 });
 
-window.onload = function() {
-    displaySavedAddresses();
-}
 
 function redirectToFiltered() {
     console.log("redirectToFiltered() function called");
@@ -26,8 +23,43 @@ function redirectToFiltered() {
 
     return false;
 }
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthenticationStatus(function(authenticated) {
+        if (authenticated) {
+            addressDropdown.addEventListener('change', function() {
+                const selectedValue = this.value;
+                const xhr = new XMLHttpRequest();
+                const url = '/restaurants?userAddress=' + (selectedValue);
+                xhr.open('POST', url, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                    } else {
+                        console.error('Error fetching filtered restaurants: ' + xhr.status);
+                    }
+                };
+                xhr.send();
+            });
 
-let addressDropdown = document.getElementById("address-dropdown");// Function to display list of saved addresses
+            displaySavedAddresses();
+        }
+    });
+});
+
+let addressDropdown = document.querySelector('#address-dropdown');
+
+function checkAuthenticationStatus(callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/auth/check-authentication', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    };
+
+    xhr.send();
+}
 function displaySavedAddresses() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', '/addresses', true);
@@ -38,8 +70,16 @@ function displaySavedAddresses() {
             if (addresses.length > 0) {
                 for (let i = 0; i < addresses.length; i++) {
                     const address = addresses[i];
+                    console.log(address);
+                    if (i === 0){
+                        html += `
+                        <option selected="selected" value="${address.streetName}, ${address.homeNumber}, ${address.city},">
+                            ${address.city}, ${address.streetName}, ${address.homeNumber}
+                        </option>
+                    `;
+                    }
                     html += `
-                        <option value="${address.city}, ${address.streetName}, ${address.homeNumber}">
+                        <option value="${address.streetName}, ${address.homeNumber}, ${address.city},">
                             ${address.city}, ${address.streetName}, ${address.homeNumber}
                         </option>
                     `;

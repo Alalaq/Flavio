@@ -3,7 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Resview - Restaurants</title>
+    <link rel="icon" href="/static/images/mini-logo%20(1).svg">
+    <title>Flavio - Restaurants</title>
     <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../static/js/main.js"></script>
     <script defer src="../static/js/restaurant.js"></script>
@@ -11,14 +12,16 @@
 <body>
 <header>
     <div class="logo">
-        <h1><a class="logoLink" href="/homepage">Resview</a></h1>
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
     </div>
     <input type="text" class="search-bar" placeholder="Search for restaurants..." />
     <label for="address-dropdown"></label>
-    <select id="address-dropdown">
-        <option value="saved-addresses">Saved Addresses</option>
-    </select>
-
+    <div sec:authorize="isAuthenticated()">
+        <label for="address-dropdown"></label>
+        <select id="address-dropdown" name="address-dropdown">
+            <option value="saved-addresses">Saved Addresses</option>
+        </select>
+    </div>
 
     <nav>
         <ul>
@@ -31,7 +34,9 @@
 </header>
 <main>
 
+
     <div class="restaurant-filters">
+        <div sec:authorize="isAuthenticated()">
         <button id="filterButton" class="btn-secondary">Filters</button>
         <div id="filterOptions" class="filter-options" style="display: none">
             <h3>Filter Options</h3>
@@ -85,6 +90,7 @@
                 </div>
             </form>
         </div>
+        </div>
     </div>
     <div class="restaurant-list">
         <h2>Restaurants</h2>
@@ -114,7 +120,7 @@
 </main>
 
 <div class="footer">
-    <p class="text-muted text-center mb-0" align="center">&copy; 2023 Resview. All rights reserved.</p>
+    <p class="text-muted text-center mb-0" align="center">&copy; 2023 Flavio. All rights reserved.</p>
 </div>
 </body>
 </html>

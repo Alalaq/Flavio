@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.controllers;
+package ru.kpfu.itis.khabibullin.controllers.MVC;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

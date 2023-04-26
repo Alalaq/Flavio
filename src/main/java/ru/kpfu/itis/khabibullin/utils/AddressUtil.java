@@ -16,9 +16,8 @@ public class AddressUtil {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(String[] args) {
-        System.out.println(calculateDistance("улица Кремлевская, Казань", "улица Академика Глушко, д.15, Казань"));
+        System.out.println(calculateDistance("Tverskaya st. 1, Moscow", "Tverskaya Street, 15, Moscow"));
     }
-
 
     /**
      * Calculates the distance between two addresses using the Haversine formula.

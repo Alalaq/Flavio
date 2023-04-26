@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.controllers;
+package ru.kpfu.itis.khabibullin.controllers.MVC;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

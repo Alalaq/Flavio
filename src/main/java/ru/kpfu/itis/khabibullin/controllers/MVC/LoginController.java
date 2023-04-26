@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.controllers;
+package ru.kpfu.itis.khabibullin.controllers.MVC;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
