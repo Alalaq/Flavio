@@ -22,6 +22,8 @@ public class UserDetailsImpl implements UserDetails {
         return Collections.singleton(authority);
     }
 
+
+
     @Override
     public String getPassword() {
         return user.getHashPassword();
@@ -50,5 +52,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return user.getState().equals(State.CONFIRMED);
+    }
+
+    public String getName(){
+        return user.getUsername();
     }
 }

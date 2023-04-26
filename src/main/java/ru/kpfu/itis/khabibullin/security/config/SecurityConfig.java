@@ -27,22 +27,28 @@ public class SecurityConfig {
                 "/css/**", "/js/**", "/img/**", "/static/**");
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
                 http
-                .authorizeHttpRequests()
-                        .anyRequest().permitAll()
-//                .requestMatchers("/homepage", "/login", "/registration", "/restaurants").permitAll()
-//                .requestMatchers("/profile").hasAnyAuthority("ADMIN", "USER")
-//                .requestMatchers("/users").hasAuthority("ADMIN")
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
-                .and().build();
+                        .csrf().disable()
+                        .authorizeHttpRequests()
+                        //.anyRequest().permitAll()
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants").permitAll()
+                        .requestMatchers("/profile/**").authenticated()
+                        .requestMatchers("/users").hasAuthority("ADMIN")
+                        .requestMatchers("/addresses/**").permitAll()
+                        .requestMatchers("/getCurrentUserId").permitAll()
+                        .requestMatchers("/logout").authenticated()
+                        .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
+                        .and().logout().logoutUrl("/myLogout")
+                        .and().build();
     }
-
 
     @Autowired
     public void bindUserDetailsServiceAndPasswordEncoder(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
     }
+
 }

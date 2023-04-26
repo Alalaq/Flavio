@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Resview - Log Out</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/main.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Resview</a></h1>
+    </div>
+    <nav>
+        <ul>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img src="avatar.jpg" alt="Profile"/></a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="logout-container">
+        <h2>Are you sure you want to log out?</h2>
+        <form action="/logout" th:action="@{/logout}" method="post">
+            <button type="submit" value="Log Out">Log Out</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="footer">
+        <p class="text-muted text-center mb-0" align="center">&copy; 2023 Resview. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

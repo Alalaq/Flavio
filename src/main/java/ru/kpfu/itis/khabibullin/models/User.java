@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.utils.Role;
 import ru.kpfu.itis.khabibullin.utils.State;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class User {
 
     @Column(name = "username", nullable = false, unique = true)
     @NotBlank(message = "Username is required")
-    @Size(min = 4, max = 20, message = "Username length must be between 4 and 20 characters")
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -40,7 +40,18 @@ public class User {
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be a valid email address")
     private String email;
-    
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
@@ -49,6 +60,5 @@ public class User {
     @Column(name = "state_of_user", nullable = false)
     private State state;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders = new ArrayList<>();
+
 }

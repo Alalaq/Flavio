@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/main.js"></script>
+    <script defer src="../static/js/profile.js"></script>
+
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Resview</a></h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="categories">
+    <ul>
+        <li><a href="#main-page">Main info</a></li>
+        <li><a href="#personal-info">Personal Information</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#data-confidentiality">Data and Confidentiality</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <div th:if="${errorMessage}" class="error-message">
+        <span th:text="${errorMessage}"></span>
+    </div>
+        <div id="popupForm" class="form-popup" >
+            <form class="form-container" method="post" th:object="${updatedUserDto}" th:action="@{/profile/save-information}">
+                <h3>Edit Information</h3>
+                <button type="button" class="close" onclick="closeForm()">&times;</button>
+                <div id="tile-specific-fields"></div>
+                <input type="password" name="password" placeholder="Confirm your old password">
+                <input type="submit" class="btn" th:method="post" value="Save">
+            </form>
+        </div>
+
+    <div th:object="${userDto}" class="profile-info" id="main-page" style="display:none;">
+        <h2>Main Information</h2>
+        <p th:field="*{username}">Username: </p>
+    </div>
+
+    <div class="profile-info" id="personal-info">
+        <h1>Personal Information</h1>
+
+
+
+        <div class="basic-info-tile profile-tile">
+            <h2>Basic Information</h2>
+            <img src="/static/images/default-avatar.jpg" alt="Avatar" />
+            <p>Username: <span th:text="${userDto.username}"></span></p>
+            <p>Email: <span th:text="${userDto.email}"></span></p>
+            <p>Birthday: <span th:text="${userDto.birthday}"></span></p>
+             <button class="openButton" onclick="openForm('basic-info')"><strong>Change Information</strong></button>
+        </div>
+
+        <div class="address-info-tile profile-tile">
+            <h2>Addresses</h2>
+            <button class="openButton" onclick="openForm('address-info')"><strong>Change Information</strong></button>
+        </div>
+
+        <div class="contact-info-tile profile-tile">
+            <h2>Contact Information</h2>
+            <p>Phone: <span th:text="${userDto.getPhoneNumber()}">555-1234</span></p>
+            <p>Email: <span th:text="${userDto.email}">johndoe@example.com</span></p>
+            <button class="openButton" onclick="openForm('contact-info')"><strong>Change Information</strong></button>
+        </div>
+    </div>
+
+    <div class="profile-info" id="security" style="display:none;">
+        <h2>Security</h2>
+        <p>Password: *********</p>
+        <p>Two-Factor Authentication: Enabled</p>
+        <button class="openButton" onclick="openForm('security-info')"><strong>Change Information</strong></button>
+    </div>
+
+    <div class="profile-info" id="data-confidentiality" style="display:none;">
+        <h2>Data and Confidentiality</h2>
+        <p>Privacy settings: </p>
+        <button id="edit-data-confidentiality-info-btn">Change Information</button>
+    </div>
+</div>
+</body>
+</html>

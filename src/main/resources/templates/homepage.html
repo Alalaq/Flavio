@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Resview</title>
     <link href="/static/styles.css" rel="stylesheet">
-    <script defer src="../static/main.js"></script>
+    <script defer src="../static/js/main.js"></script>
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
             <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
             <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
             <li><a href="/restaurants">Restaurants</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="/profile"><img src="avatar.jpg" alt="Profile"/></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>
         </ul>
     </nav>
 </header>

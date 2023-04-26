@@ -1,3 +1,4 @@
+
 INSERT INTO restaurants (name, general_rating, price, address, description)
 VALUES
     ('The Hungry Bear', null, '$$', 'Moscow, Tverskaya st. 1', 'The Hungry Bear is a cozy restaurant with a wide range of dishes. It is famous for its burgers and delicious desserts.'),
@@ -55,4 +56,3 @@ VALUES
     (7, 'CHINESE', 4.1),
     (7, 'JAPANESE', 4.2),
     (7, 'KOREAN', 4.3);
-

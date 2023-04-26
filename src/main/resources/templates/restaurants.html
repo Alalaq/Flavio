@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>Resview - Restaurants</title>
     <link href="/static/styles.css" rel="stylesheet">
-    <script defer src="../static/main.js"></script>
-    <script defer src="../static/restaurant.js"></script>
+    <script defer src="../static/js/main.js"></script>
+    <script defer src="../static/js/restaurant.js"></script>
 </head>
 <body>
 <header>
@@ -17,7 +17,6 @@
     <label for="address-dropdown"></label>
     <select id="address-dropdown">
         <option value="saved-addresses">Saved Addresses</option>
-        <option value="new-address">New Address +</option>
     </select>
 
 
@@ -26,7 +25,7 @@
             <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
             <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
             <li><a href="/restaurants">Restaurants</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="/profile"><img src="avatar.jpg" alt="Profile"/></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>
         </ul>
     </nav>
 </header>
@@ -52,15 +51,15 @@
                     <label for="cuisine">Cuisine:</label>
                     <select id="cuisine" name="cuisine" multiple>
                         <option value=""  selected>Any</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="American">American</option>
-                        <option value="French">French</option>
-                        <option value="Japanese">Japanese</option>
-                        <option value="Georgian">Georgian</option>
-                        <option value="Russian">Russian</option>
-                        <option value="Korean">Korean</option>
+                        <option value="ITALIAN">Italian</option>
+                        <option value="CHINESE">Chinese</option>
+                        <option value="MEXICAN">Mexican</option>
+                        <option value="AMERICAN">American</option>
+                        <option value="FRENCH">French</option>
+                        <option value="JAPANESE">Japanese</option>
+                        <option value="GEORGIAN">Georgian</option>
+                        <option value="RUSSIAN">Russian</option>
+                        <option value="KOREAN">Korean</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -82,7 +81,7 @@
                     </select>
                 </div>
                 <div class="form-group" th:method="post">
-                    <button type="submit" class="btn-primary" onclick="redirectToFiltered()">Filter</button>
+                    <button type="submit" class="btn-primary" onclick="redirectToFiltered(); return false;">Filter</button>
                 </div>
             </form>
         </div>
@@ -90,18 +89,27 @@
     <div class="restaurant-list">
         <h2>Restaurants</h2>
         <div class="restaurant-list">
-            <div th:each="restaurant : ${restaurants}">
-                <div class="restaurant">
-                    <h3><a th:href="@{/restaurants/{id}(id=${restaurant.id})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
-                    <p><strong>Rating:</strong> <span th:text="${restaurant.getGeneralRating()}"></span></p>
-                    <p><strong>Cuisines Rating:</strong> <span th:text="${restaurant.getCuisineRatings()}"></span></p>
-                    <p><strong>Address:</strong> <span th:text="${restaurant.getAddress()}"></span></p>
-                    <p><strong>Description:</strong> <span th:text="${restaurant.getDescription()}"></span></p>
-                    <p><strong>Price:</strong> <span th:text="${restaurant.price}"></span></p>
-                </div>
+            <div class="restaurant-row">
+                <div th:each="restaurant : ${restaurants}" class="restaurant-item">
+                    <div class="restaurant">
+                        <img class="restaurant-image" th:src="@{'/static/images/' + ${restaurant.id} + '.jpg'}" alt="Restaurant Image">
+                        <h3><a th:href="@{/restaurants/{id}(id=${restaurant.id})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
+                        <p><strong>Rating:</strong> <span th:text="${restaurant.getGeneralRating()}"></span></p>
+                        <p><strong>Cuisines Rating:</strong> <span th:text="${restaurant.getCuisineRatings()}"></span></p>
+                        <p><strong>Address:</strong> <span th:text="${restaurant.getAddress()}"></span></p>
+                        <p><strong>Description:</strong> <span th:text="${restaurant.getDescription()}"></span></p>
+                        <p><strong>Price:</strong> <span th:text="${restaurant.price}"></span></p>
+                    </div>
+                    <!-- Close the restaurant div and add the following code -->
+                    <!-- If the iteration count is divisible by 3, create a new restaurant row -->
+                    <th:block th:if="${(restaurant.id + 1) % 3 == 0}"/>
+                </div><div class="restaurant-row">
+                </th:block>
+            </div>
             </div>
         </div>
     </div>
+
 
 </main>
 
