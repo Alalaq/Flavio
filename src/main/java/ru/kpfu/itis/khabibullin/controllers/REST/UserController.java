@@ -3,8 +3,11 @@ package ru.kpfu.itis.khabibullin.controllers.REST;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.khabibullin.dto.SignUpDto;
+import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.dto.UserDto;
 import ru.kpfu.itis.khabibullin.services.UserService;
+import ru.kpfu.itis.khabibullin.utils.Role;
+import ru.kpfu.itis.khabibullin.utils.State;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +22,7 @@ public class UserController {
     // Get all users
     @GetMapping("/")
     public List<UserDto> getAllUsers() {
-        return (userService.getAllUsers());
+        return (userService.getAllUsersWithRole("USER"));
     }
 
     // Get a user by id
@@ -34,17 +37,19 @@ public class UserController {
         userService.saveUser(user);
     }
 
-    // Update an existing user
-//    @PutMapping("/{id}")
-//    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-//        User existingUser = usersRepository.findById(id).orElse(null);
-//        if (existingUser != null) {
-//            existingUser.setName(user.getName());
-//            existingUser.setEmail(user.getEmail());
-//            return usersRepository.save(existingUser);
-//        }
-//        return null;
-//    }
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable Long id, @RequestParam String updateField, @RequestBody String updateValue) {
+        UpdatedUserDto existingUser = userService.getUserForUpdateById(id);
+        if (existingUser != null) {
+            if (updateField.equalsIgnoreCase("state")) {
+                existingUser.setState(State.valueOf(updateValue));
+            } else if (updateField.equalsIgnoreCase("role")) {
+                existingUser.setRole(Role.valueOf(updateValue.toUpperCase()));
+            }
+            userService.updateUser(existingUser);
+        }
+    }
+
 
     // Delete a user by id
     @DeleteMapping("/{id}")

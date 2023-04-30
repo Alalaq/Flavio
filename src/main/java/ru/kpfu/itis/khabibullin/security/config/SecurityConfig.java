@@ -33,13 +33,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
                 http
-                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurants/filtered")
+                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurants/filtered", "/api/users/**")
                         .and()
                         .authorizeHttpRequests()
                    //     .anyRequest().permitAll()
-                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**", "/addresses/**", "/getCurrentUserId", "/auth/check-authentication", "/api/users/*").permitAll()
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**", "/addresses/**", "/getCurrentUserId", "/auth/check-authentication").permitAll()
                         .requestMatchers("/profile/**", "/logout", "/restaurants/filtered").authenticated()
-                        .requestMatchers("/users").hasAuthority("ADMIN")
+                        .requestMatchers("/users", "/api/users/*", "/admin-page").hasAuthority("ADMIN")
                         .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                         .and().logout().logoutUrl("/myLogout")
                         .and().build();

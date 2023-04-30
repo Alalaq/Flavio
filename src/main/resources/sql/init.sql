@@ -22,6 +22,25 @@ CREATE OR REPLACE TRIGGER update_restaurant_rating_trigger
     FOR EACH ROW
 EXECUTE FUNCTION update_restaurant_rating();
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+DO $$
+    DECLARE i INTEGER := 2;
+    BEGIN
+        WHILE i <= 10 LOOP
+                INSERT INTO account (username, password, email, phone_number, birthday, role, state_of_user)
+                VALUES (
+                               'user' || i,
+                               crypt('password' || i, gen_salt('bf')),
+                               'user' || i || '@example.com',
+                               '123-456-7890',
+                               DATE '1990-01-01' + (random() * (DATE '2000-12-31' - DATE '1990-01-01') + 1)::integer,
+                               'USER',
+                               'CONFIRMED'
+                       );
+                i := i + 1;
+            END LOOP;
+    END $$;
+
 
 
 INSERT INTO restaurants (name, general_rating, price, address, description)

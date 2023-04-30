@@ -50,6 +50,8 @@ public class UserDto {
                 .birthday(dto.getBirthday())
                 .orders(dto.getOrders())
                 .addresses(dto.getAddresses())
+                .state(dto.getState())
+                .role(dto.getRole())
                 .build();
     }
 
@@ -68,6 +70,8 @@ public class UserDto {
                 .birthday(user.getBirthday())
                 .orders(user.getOrders())
                 .addresses(user.getAddresses())
+                .state(user.getState())
+                .role(user.getRole())
                 .build();
     }
 

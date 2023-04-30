@@ -12,6 +12,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5431/flavio_db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=qW*RK909
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/openjdk-17/bin:/usr/local/openjdk-17/lib:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/C:/Program Files/Git/bin/
     networks:
       - cloud
     logging:
@@ -25,6 +26,7 @@ services:
     container_name: postgres-container-1
     ports:
       - "5431:5432"
+    user: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=qW*RK909

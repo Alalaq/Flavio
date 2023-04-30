@@ -9,6 +9,9 @@ import java.util.List;
 public interface UserService {
     UserDto getUserById(Long id);
     UpdatedUserDto getUserForUpdateByEmail(String email);
+
+    UpdatedUserDto getUserForUpdateById(Long id);
+
     UserDto getUserByUsername(String username);
     UserDto getUserByEmail(String email);
     List<UserDto> getAllUsers();
@@ -16,4 +19,6 @@ public interface UserService {
     void deleteUserById(long id);
 
     void updateUser(UpdatedUserDto user);
+
+    List<UserDto> getAllUsersWithRole(String user);
 }

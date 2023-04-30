@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/admin-page.js"></script>
+
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..." />
+    <nav>
+        <ul>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a class="active" href="/admin-page">Users</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div id="no-users" style="display: none;">There are no users</div>
+    <table id="user-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="user-table-body">
+        </tbody>
+    </table>
+
+</main>
+</body>
+<div class="footer">
+    <p class="text-muted text-center mb-0" align="center">&copy; 2023 Flavio. All rights reserved.</p>
+</div>
+</html>

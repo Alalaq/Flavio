@@ -52,6 +52,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UpdatedUserDto getUserForUpdateById(Long id) {
+        User user = usersRepository.findUserById(id).orElseThrow(() -> new NotFoundException("User with id: <" + id + "> not found"));
+        return UpdatedUserDto.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .hashPassword(user.getHashPassword())
+                .birthday(user.getBirthday())
+                .phoneNumber(user.getPhoneNumber())
+                .role(user.getRole())
+                .state(user.getState())
+                .orders(user.getOrders() == null ? new ArrayList<>() : user.getOrders())
+                .build();
+    }
+
+    @Override
     public UserDto getUserByUsername(String username) {
         return UserDto.from(usersRepository.findUserByUsername(username).orElseThrow(() -> new NotFoundException("User with username: <" + username + "> not found")));
     }
@@ -101,6 +117,11 @@ public class UserServiceImpl implements UserService {
 
         updateAuthentication(userForSave);
         usersRepository.save(userForSave);
+    }
+
+    @Override
+    public List<UserDto> getAllUsersWithRole(String role) {
+        return UserDto.from(usersRepository.findUsersByRoleOrderById(Role.valueOf(role)));
     }
 
     public static void updateAuthentication(User user) {
