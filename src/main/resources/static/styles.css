@@ -53,6 +53,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px;
+    min-height: 600px;
 }
 
 .recent-activity {
@@ -91,10 +92,9 @@ main {
 
 
 .footer {
-    background-color: #F9F9F9;
+    /*background-color: #F9F9F9;*/
     padding: 20px;
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    /*box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);*/
     bottom: 0;
     left: 0;
     height: 50px;
@@ -118,7 +118,7 @@ nav img{
     vertical-align: middle;
     margin-right: 20px;
     padding: 5px 10px;
-    width: 250px;
+    width: 40%;
     border: 2px solid #ccc;
     border-radius: 5px;
 }
@@ -188,7 +188,6 @@ a:visited, a:focus, a:hover {
     width: 100%;
     padding: 10px;
     border: none;
-
 }
 /* Sign in page styles */
 .signin-form {
@@ -425,6 +424,14 @@ a:visited, a:focus, a:hover {
         padding: 20px;
     }
 }
+.btn{
+   border: none;
+    padding: 10px;
+}
+
+.btn:hover{
+
+}
 
 .filter-options {
     display: flex;
@@ -491,7 +498,10 @@ select option:hover {
 .restaurant{
     text-decoration: none;
 }
-
+.restaurant-row{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .error-message {
     color: #fff;
@@ -563,7 +573,7 @@ body.dark-mode {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -621,8 +631,9 @@ body.dark-mode {
 
 
 
+
 /* Style for the form input fields */
-input[type="text"],
+
 input[type="password"],
 input[type="email"],
 input[type="date"],

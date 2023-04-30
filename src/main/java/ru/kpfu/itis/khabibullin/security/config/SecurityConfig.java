@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -32,16 +33,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
                 http
-                        .csrf().disable()
+                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurants/filtered")
+                        .and()
                         .authorizeHttpRequests()
-                        .requestMatchers("/auth/check-authentication").permitAll()
-                        //.anyRequest().permitAll()
-                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**").permitAll()
-                        .requestMatchers("/profile/**").authenticated()
+                   //     .anyRequest().permitAll()
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**", "/addresses/**", "/getCurrentUserId", "/auth/check-authentication", "/api/users/*").permitAll()
+                        .requestMatchers("/profile/**", "/logout", "/restaurants/filtered").authenticated()
                         .requestMatchers("/users").hasAuthority("ADMIN")
-                        .requestMatchers("/addresses/**").permitAll()
-                        .requestMatchers("/getCurrentUserId").permitAll()
-                        .requestMatchers("/logout").authenticated()
                         .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                         .and().logout().logoutUrl("/myLogout")
                         .and().build();
@@ -51,5 +49,4 @@ public class SecurityConfig {
     public void bindUserDetailsServiceAndPasswordEncoder(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
     }
-
 }

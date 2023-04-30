@@ -86,7 +86,7 @@ function openForm(tile) {
 
         })();
 
-            let newAddress;
+        let newAddress;
         const addAddressButton = document.createElement("button");
         addAddressButton.innerHTML = "Add Address";
         addAddressButton.className = "add-address-button";

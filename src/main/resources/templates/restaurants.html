@@ -19,6 +19,7 @@
     <div sec:authorize="isAuthenticated()">
         <label for="address-dropdown"></label>
         <select id="address-dropdown" name="address-dropdown">
+            <option selected>Choose an address</option>
             <option value="saved-addresses">Saved Addresses</option>
         </select>
     </div>
@@ -37,7 +38,8 @@
 
     <div class="restaurant-filters">
         <div sec:authorize="isAuthenticated()">
-        <button id="filterButton" class="btn-secondary">Filters</button>
+            <div class="form-group"></div>
+        <button id="filterButton" class="btn">Filters</button>
         <div id="filterOptions" class="filter-options" style="display: none">
             <h3>Filter Options</h3>
             <form action="/restaurants" method="get" class="filter-options">
@@ -86,6 +88,7 @@
                     </select>
                 </div>
                 <div class="form-group" th:method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                     <button type="submit" class="btn-primary" onclick="redirectToFiltered(); return false;">Filter</button>
                 </div>
             </form>

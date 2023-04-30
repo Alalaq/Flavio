@@ -45,7 +45,6 @@ public class RestaurantController {
                                             Model model) {
         Set<Cuisine> cuisineSet = cuisines != null ? cuisines.stream().map(Cuisine::valueOf).collect(Collectors.toSet()) : null;
         Set<Price> priceSet = prices != null ? prices.stream().map(Price::valueOf).collect(Collectors.toSet()) : null;
-        System.out.println(userAddress);
         List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisineSet, priceSet, distance, userAddress, rating);
         model.addAttribute("restaurants", restaurants);
         return "restaurants";

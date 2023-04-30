@@ -67,22 +67,19 @@ function displaySavedAddresses() {
         if (xhr.status === 200) {
             let addresses = JSON.parse(xhr.responseText);
             let html = '';
+            html += `
+                        <option value="Select an option" disabled selected>Select an option</option>
+                    `;
             if (addresses.length > 0) {
                 for (let i = 0; i < addresses.length; i++) {
                     const address = addresses[i];
                     console.log(address);
-                    if (i === 0){
-                        html += `
-                        <option selected="selected" value="${address.streetName}, ${address.homeNumber}, ${address.city},">
-                            ${address.city}, ${address.streetName}, ${address.homeNumber}
-                        </option>
-                    `;
-                    }
-                    html += `
+                      html += `
                         <option value="${address.streetName}, ${address.homeNumber}, ${address.city},">
                             ${address.city}, ${address.streetName}, ${address.homeNumber}
                         </option>
                     `;
+
                 }
             } else {
                 html += '<option value="" disabled>No saved addresses found</option>';

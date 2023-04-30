@@ -1,3 +1,7 @@
+DROP TRIGGER update_restaurant_rating_trigger on restaurant_cuisine_rating;
+DROP TRIGGER update_restaurant_rating_trigger on restaurants;
+
+
 CREATE OR REPLACE FUNCTION update_restaurant_rating()
     RETURNS TRIGGER AS
 $$

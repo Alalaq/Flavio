@@ -26,7 +26,7 @@ public class AddressUtil {
             .build();
 
     public static void main(String[] args) {
-        System.out.println(AddressUtil.calculateDistance("Bauman street, 5, Kazan", "Academician Glushko street, 15, Kazan"));
+        System.out.println(AddressUtil.calculateDistance("Tverskaya st. 1, Moscow", "Academician Glushko street, 15, Kazan"));
     }
 
     /**
@@ -58,7 +58,6 @@ public class AddressUtil {
 
 
     public static Coordinates getCoordinates(String address) {
-        System.out.println(address);
         if (address == null || address.isEmpty()) {
             throw new IllegalArgumentException("Address cannot be null or empty");
         }
@@ -79,8 +78,6 @@ public class AddressUtil {
                 JsonNode results = responseBody.get("results");
                 if (results.isArray() && results.size() > 0) {
                     for (JsonNode result : results) {
-//                        int confidence = result.get("confidence").asInt();
-//                        if (confidence >= 7) {
                             JsonNode geometry = result.get("geometry");
                             if (geometry != null) {
                                 double latitude = geometry.get("lat").asDouble();
@@ -89,7 +86,6 @@ public class AddressUtil {
                                 coordinatesCache.put(address, coordinates);
                                 return coordinates;
                             }
-                        //}
                     }
                 }
             }
