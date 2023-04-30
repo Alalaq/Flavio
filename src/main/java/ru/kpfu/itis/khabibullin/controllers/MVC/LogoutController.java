@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LogoutController {
     @GetMapping("/logout")
     public String logoutPage() {
-        return "logout"; // return the view for your custom logout page
+        return "logout";
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) throws ServletException {
-        request.logout(); // logout the user
-        return "redirect:/login?logout"; // redirect to the login page with a logout parameter
+        request.logout();
+        return "redirect:/login?logout";
     }
 
 }

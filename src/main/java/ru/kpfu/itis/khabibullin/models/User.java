@@ -47,6 +47,10 @@ public class User {
     @Column(name = "birthday")
     private LocalDate birthday;
 
+    //When user is created this token is used to verify email
+    @Column(nullable = false)
+    private String verificationToken;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 

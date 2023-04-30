@@ -5,7 +5,6 @@
     <title>User Profile</title>
     <link rel="icon" href="/static/images/mini-logo%20(1).svg">
     <link href="/static/styles.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="../static/js/main.js"></script>
     <script defer src="../static/js/profile.js" th:inline="javascript"></script>
 </head>
@@ -52,6 +51,10 @@
     <div th:object="${userDto}" class="profile-info" id="main-page" style="display:none;">
         <h2>Main Information</h2>
         <p th:field="*{username}">Username: </p>
+        <div class="logout-container">
+            <a href="/logout" class="logout-button">Logout</a>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        </div>
     </div>
 
     <div class="profile-info" id="personal-info">
@@ -94,5 +97,6 @@
         <button id="edit-data-confidentiality-info-btn">Change Information</button>
     </div>
 </div>
+
 </body>
 </html>

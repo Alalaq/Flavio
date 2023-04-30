@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class SpringBootProjectApplication {
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -24,4 +23,12 @@ public class SpringBootProjectApplication {
 		SpringApplication.run(SpringBootProjectApplication.class, args);
 	}
 
+
+
+//	@Autowired
+//	private EmailServiceImpl emailService;
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void sendMail(){
+//		emailService.sendEmail("muzikma@mail.ru", "This is subject", "This is body");
+//	}
 }

@@ -21,4 +21,6 @@ public interface UserService {
     void updateUser(UpdatedUserDto user);
 
     List<UserDto> getAllUsersWithRole(String user);
+
+    UpdatedUserDto getUserForUpdateByVerificationToken(String verificationToken);
 }

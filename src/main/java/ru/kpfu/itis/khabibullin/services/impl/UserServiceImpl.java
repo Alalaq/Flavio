@@ -89,7 +89,8 @@ public class UserServiceImpl implements UserService {
                 .username(user.getUsername())
                 .hashPassword(passwordEncoder.encode(user.getPassword()))
                 .role(Role.USER)
-                .state(State.CONFIRMED)
+                .state(State.NOT_CONFIRMED)
+                .verificationToken(user.getVerificationToken())
                 .build();
 
         usersRepository.save(userForSave);
@@ -122,6 +123,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsersWithRole(String role) {
         return UserDto.from(usersRepository.findUsersByRoleOrderById(Role.valueOf(role)));
+    }
+
+    @Override
+    public UpdatedUserDto getUserForUpdateByVerificationToken(String verificationToken) {
+        User user = usersRepository.findUsersByVerificationToken(verificationToken).orElseThrow(() -> new NotFoundException("User with verification token: <" + verificationToken + "> not found"));
+        return UpdatedUserDto.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .hashPassword(user.getHashPassword())
+                .birthday(user.getBirthday())
+                .phoneNumber(user.getPhoneNumber())
+                .role(user.getRole())
+                .state(user.getState())
+                .orders(user.getOrders() == null ? new ArrayList<>() : user.getOrders())
+                .build();
     }
 
     public static void updateAuthentication(User user) {
