@@ -1,48 +1,5 @@
-DROP TRIGGER update_restaurant_rating_trigger on restaurant_cuisine_rating;
-DROP TRIGGER update_restaurant_rating_trigger on restaurants;
 
-
-CREATE OR REPLACE FUNCTION update_restaurant_rating()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    UPDATE restaurants
-    SET general_rating =
-            (SELECT AVG((rating))
-             FROM restaurant_cuisine_rating
-             WHERE restaurant_cuisine_rating.restaurant_id = NEW.restaurant_id)
-    WHERE restaurants.restaraunt_id = NEW.restaurant_id;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER update_restaurant_rating_trigger
-    AFTER INSERT OR UPDATE OR DELETE
-    ON restaurant_cuisine_rating
-    FOR EACH ROW
-EXECUTE FUNCTION update_restaurant_rating();
-
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-DO $$
-    DECLARE i INTEGER := 2;
-    BEGIN
-        WHILE i <= 10 LOOP
-                INSERT INTO account (username, password, email, phone_number, birthday, role, state_of_user)
-                VALUES (
-                               'user' || i,
-                               crypt('password' || i, gen_salt('bf')),
-                               'user' || i || '@example.com',
-                               '123-456-7890',
-                               DATE '1990-01-01' + (random() * (DATE '2000-12-31' - DATE '1990-01-01') + 1)::integer,
-                               'USER',
-                               'CONFIRMED'
-                       );
-                i := i + 1;
-            END LOOP;
-    END $$;
-
-
-
+-- Restaurants data
 INSERT INTO restaurants (name, general_rating, price, address, description)
 VALUES ('The Hungry Bear', null, '$$', 'Tverskaya st. 1, Moscow',
         'The Hungry Bear is a cozy restaurant with a wide range of dishes. It is famous for its burgers and delicious desserts.'),
@@ -58,21 +15,23 @@ VALUES ('The Hungry Bear', null, '$$', 'Tverskaya st. 1, Moscow',
         'Mamma Mia is an Italian restaurant that also serves American and Mexican cuisine. The menu includes a variety of pizzas, pastas, and burgers.'),
        ('The Golden Phoenix', null, '$$$', 'Leningradskaya st. 10, Samara',
         'The Golden Phoenix is a Chinese restaurant that also serves Japanese and Korean cuisine. The menu includes a variety of dim sum, sushi, and Korean barbecue.'),
-       ('The Kazan Kitchen', null, '', 'Kremlevskaya st. 1, Kazan',
+       ('The Kazan Kitchen', null, '$', 'Kremlevskaya st. 1, Kazan',
         'The Kazan Kitchen offers traditional Tatar cuisine in a modern setting. The menu includes dishes such as chak-chak and echpochmak, as well as Russian favorites like borscht.'),
        ('Mangal', null, '$$$', 'Gogol st. 10, Kazan',
         'Mangal is a high-end Turkish restaurant with an extensive wine list. The menu includes a variety of kebabs and mezze, as well as grilled seafood.'),
-       ('Soul Kitchen', null, '', 'Bauman st. 5, Kazan',
+       ('Soul Kitchen', null, '$$', 'Bauman st. 5, Kazan',
         'Soul Kitchen is a cozy cafe that serves healthy, organic food. The menu includes vegetarian and vegan options, as well as smoothies and juices.'),
-       ('Chez Michel', null, '', 'Pushkin st. 1, Moscow',
+       ('Chez Michel', null, '$$$', 'Pushkin st. 1, Moscow',
         'Chez Michel is a French restaurant that offers a modern take on classic dishes. The atmosphere is elegant and sophisticated.'),
        ('The Spicy Noodle', null, '$', 'Kirova st. 5, Kazan',
         'The Spicy Noodle is a casual Asian restaurant that specializes in noodles and dumplings. The menu includes both Chinese and Japanese options.'),
        ('Mamma Roma', null, '$$', 'Kremlevskaya st. 10, Kazan',
         'Mamma Roma is an Italian restaurant that specializes in pizza and pasta. The menu includes a variety of traditional Italian dishes.'),
-       ('The Ottoman Empire', null, '', 'Kremlevskaya st. 15, Kazan',
+       ('The Ottoman Empire', null, '$', 'Kremlevskaya st. 15, Kazan',
         'The Ottoman Empire is a Turkish restaurant that offers a fusion of Ottoman and Mediterranean cuisine. The atmosphere is luxurious and the service is impeccable.');
 
+
+--Cuisines data
 INSERT INTO restaurant_cuisine_rating (restaurant_id, cuisine, rating)
 VALUES (1, 'AMERICAN', 4.3),
        (1, 'ITALIAN', 4.5),
@@ -126,3 +85,65 @@ VALUES (1, 'AMERICAN', 4.3),
        (14, 'GEORGIAN', 4.3),
        (14, 'ITALIAN', 4.7),
        (14, 'CHINESE', 4.5);
+
+DROP TRIGGER IF EXISTS update_restaurant_rating_trigger on restaurant_cuisine_rating;
+DROP TRIGGER IF EXISTS update_restaurant_rating_trigger on restaurants;
+
+
+CREATE OR REPLACE FUNCTION update_restaurant_rating()
+    RETURNS TRIGGER AS
+$$
+BEGIN
+    UPDATE restaurants
+    SET general_rating =
+            (SELECT AVG((rating))
+             FROM restaurant_cuisine_rating
+             WHERE restaurant_cuisine_rating.restaurant_id = NEW.restaurant_id)
+    WHERE restaurants.restaraunt_id = NEW.restaurant_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER update_restaurant_rating_trigger
+    AFTER INSERT OR UPDATE OR DELETE
+    ON restaurant_cuisine_rating
+    FOR EACH ROW
+EXECUTE FUNCTION update_restaurant_rating();
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+DO $$
+    DECLARE i INTEGER := 2;
+    BEGIN
+        WHILE i <= 11 LOOP
+                INSERT INTO account (username, password, email, phone_number, birthday, role, state_of_user)
+                VALUES (
+                               'user' || i,
+                               crypt('password' || i, gen_salt('bf')),
+                               'user' || i || '@example.com',
+                               '123-456-7890',
+                               DATE '1990-01-01' + (random() * (DATE '2000-12-31' - DATE '1990-01-01') + 1)::integer,
+                               'USER',
+                               'CONFIRMED'
+                       );
+                i := i + 1;
+            END LOOP;
+    END $$;
+
+-- Dishes data (for Hungry bear only for now)
+INSERT INTO dishes (name, cuisine, description, price, restaurant_id, is_vegetarian, image_url)
+VALUES
+    ('Classic cheeseburger', 'AMERICAN', 'Juicy beef patty topped with melted cheese and fresh vegetables, served on a soft bun', 880, 1, false, 'https://example.com/american/cheeseburger.jpg'),
+    ('Loaded fries', 'AMERICAN', 'Crispy fries topped with melted cheese, bacon bits, and green onions, served with ranch dressing', 640, 1, true, 'https://example.com/american/loadedfries.jpg'),
+    ('BBQ chicken wings', 'AMERICAN', 'Crispy chicken wings smothered in tangy BBQ sauce, served with celery sticks and blue cheese dressing', 800, 1, false, 'https://example.com/american/chickenwings.jpg'),
+    ('Margherita pizza', 'ITALIAN', 'Classic pizza topped with fresh tomato sauce, mozzarella cheese, and basil', 1040, 1, true, 'https://example.com/italian/margheritapizza.jpg'),
+    ('Spaghetti carbonara', 'ITALIAN', 'Pasta dish made with spaghetti, eggs, bacon, and Parmesan cheese', 1200, 1, false, 'https://example.com/italian/spaghetticarbonara.jpg'),
+    ('Lasagna', 'ITALIAN', 'Layered pasta dish made with beef ragu, tomato sauce, and cheese', 1360, 1, false, 'https://example.com/italian/lasagna.jpg'),
+    ('Nachos', 'MEXICAN', 'Tortilla chips topped with melted cheese, jalapenos, guacamole, and sour cream', 720, 1, true, 'https://example.com/mexican/nachos.jpg'),
+    ('Chicken quesadilla', 'MEXICAN', 'Grilled chicken and melted cheese folded in a crispy tortilla, served with salsa and sour cream', 960, 1, false, 'https://example.com/mexican/quesadilla.jpg'),
+    ('Beef burrito', 'MEXICAN', 'Large flour tortilla stuffed with seasoned beef, rice, beans, and cheese, served with salsa and sour cream', 1120, 1, false, 'https://example.com/mexican/burrito.jpg'),
+    ('Sushi Rolls', 'JAPANESE', 'Assorted sushi rolls with fresh fish and vegetables', 2070, 1, false, NULL),
+    ('Ramen Noodle Soup', 'JAPANESE', 'Traditional Japanese noodle soup with pork and vegetables', 1270, 1, false, NULL),
+    ('Teriyaki Chicken Skewers', 'JAPANESE', 'Grilled chicken skewers marinated in sweet teriyaki sauce', 1040, 1, false, NULL),
+    ('Bibimbap', 'KOREAN', 'Korean rice bowl topped with vegetables, beef, and egg', 1590, 1, false, NULL),
+    ('Korean Fried Chicken', 'KOREAN', 'Crispy fried chicken with a spicy glaze', 1350, 1, false, NULL),
+    ('Japchae', 'KOREAN', 'Stir-fried glass noodles with vegetables and beef', 1190, 1, false, NULL);

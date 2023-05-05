@@ -23,12 +23,4 @@ public class SpringBootProjectApplication {
 		SpringApplication.run(SpringBootProjectApplication.class, args);
 	}
 
-
-
-//	@Autowired
-//	private EmailServiceImpl emailService;
-//	@EventListener(ApplicationReadyEvent.class)
-//	public void sendMail(){
-//		emailService.sendEmail("muzikma@mail.ru", "This is subject", "This is body");
-//	}
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-public class AuthenticationController {
+public class AuthenticationRestController {
 
     @GetMapping("/auth/check-authentication")
     public ResponseEntity<?> isAuthenticated(Principal principal){

@@ -33,12 +33,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
                 http
-                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error")
+                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurant/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error", "/dishes/**", "cart")
                         .and()
                         .authorizeHttpRequests()
-                   //     .anyRequest().permitAll()
-                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants/**", "/addresses/**", "/getCurrentUserId", "/auth/check-authentication", "/verify-email/**", "/error").permitAll()
-                        .requestMatchers("/profile/**", "/logout", "/restaurants/filtered").authenticated()
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants","/addresses/**", "/getCurrentUserId", "/auth/check-authentication", "/verify-email/**", "/error", "/", "/dishes/**").permitAll()
+                        .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**").authenticated()
                         .requestMatchers("/users", "/api/users/*", "/admin-page").hasAuthority("ADMIN")
                         .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                         .and().logout().logoutUrl("/myLogout")

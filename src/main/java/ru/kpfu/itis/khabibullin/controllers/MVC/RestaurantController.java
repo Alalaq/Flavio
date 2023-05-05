@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
+import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
 import ru.kpfu.itis.khabibullin.utils.Cuisine;
 import ru.kpfu.itis.khabibullin.utils.Price;
 
@@ -48,6 +49,26 @@ public class RestaurantController {
         List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisineSet, priceSet, distance, userAddress, rating);
         model.addAttribute("restaurants", restaurants);
         return "restaurants";
+    }
+
+    @GetMapping("/{restaurantName}")
+    public String getRestaurantPage(@PathVariable String restaurantName,
+                                    Model model){
+        double speed = 12.0;
+        if (userAddress != null) {
+            double distance = AddressUtil.calculateDistance(userAddress, restaurantService.getRestaurantByName(restaurantName.replace("%20", " ")).getAddress());
+            double roundedTimeInMinutes = Math.round(((distance / speed) * 60) / 5) * 5;
+            int lowerBound = (int) roundedTimeInMinutes - 5;
+            int upperBound = (int) roundedTimeInMinutes;
+
+            String deliveryTime = lowerBound + "-" + upperBound;
+
+            model.addAttribute("restaurant-delivery-time", deliveryTime);
+        } else {
+            model.addAttribute("restaurant-delivery-time", -1);
+        }
+        model.addAttribute("restaurant-name", restaurantName);
+        return "restaurant";
     }
 
 }

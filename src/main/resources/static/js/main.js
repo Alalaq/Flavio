@@ -14,28 +14,8 @@ reviews.forEach(review => {
         review.style.transform = 'none';
     });
 });
-// Select the header element and create a new search bar element
-const header = document.querySelector('header');
-// const searchBar = document.createElement('input');
-//
-// // Set the attributes of the search bar
-// searchBar.type = 'text';
-// searchBar.placeholder = 'Search for restaurants...';
-// searchBar.classList.add('search-bar'); // Add a class for styling
-//
-// // Select the logo div and its parent div
-// const logo = document.querySelector('.logo');
-// const parentDiv = logo.parentElement;
-//
-// // Insert the search bar element after the logo div
-// parentDiv.insertBefore(searchBar, logo.nextSibling);
 
-// searchBar = document.querySelector('.search-bar');
-// // Add an event listener to the search bar for user input
-// searchBar.addEventListener('input', function(event) {
-//     const searchText = event.target.value; // Get the text entered by the user
-//     console.log(searchText); // Do something with the search text, like filter the restaurant reviews
-// });
+const header = document.querySelector('header');
 
 
 

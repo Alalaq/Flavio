@@ -2,7 +2,7 @@ package ru.kpfu.itis.khabibullin.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
-import ru.kpfu.itis.khabibullin.utils.AddressUtil;
+import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
 import ru.kpfu.itis.khabibullin.utils.Cuisine;
 import ru.kpfu.itis.khabibullin.utils.Price;
 
@@ -14,6 +14,7 @@ import java.util.Set;
 public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findRestaurantById(Long id);
 
+    Optional<Restaurant> findRestaurantByName(String name);
 
     default List<Restaurant> findByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating) {
         List<Restaurant> restaurants = findAll();

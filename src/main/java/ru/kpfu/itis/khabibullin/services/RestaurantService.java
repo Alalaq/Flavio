@@ -19,4 +19,8 @@ public interface RestaurantService {
     void editRestaurant(Long id, RestaurantDto restaurant);
 
     void deleteRestaurant(Long id) ;
+
+    RestaurantDto getRestaurantByName(String name);
+
+    void save(RestaurantDto restaurant);
 }

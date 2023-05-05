@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
                 .role(Role.USER)
                 .state(State.NOT_CONFIRMED)
                 .verificationToken(user.getVerificationToken())
+                .avatarUrl("https://i.pinimg.com/originals/18/03/0a/18030a87d8370ab68eb276782ba9c2e1.png")
                 .build();
 
         usersRepository.save(userForSave);

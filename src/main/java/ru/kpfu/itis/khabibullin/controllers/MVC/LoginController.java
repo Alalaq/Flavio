@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
     @GetMapping({"/login"})
     public String login(@RequestParam(required = false) String error, Model model) {
+        //TODO: handle wrong username/password and non confirmed user separately
         if (error != null) {
             model.addAttribute("errorMessage", "Invalid username or password");
         }

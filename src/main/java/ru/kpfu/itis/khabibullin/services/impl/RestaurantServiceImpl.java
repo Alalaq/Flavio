@@ -44,11 +44,28 @@ public class RestaurantServiceImpl implements RestaurantService {
         existingRestaurant.setName(restaurant.getName());
         existingRestaurant.setDescription(restaurant.getDescription());
         existingRestaurant.setAddress(restaurant.getAddress());
+        if (restaurant.getImageUrl() != null && !restaurant.getImageUrl().equals("")){
+            existingRestaurant.setImageUrl(restaurant.getImageUrl());
+        }
         restaurantsRepository.save(existingRestaurant);
     }
 
     @Override
     public void deleteRestaurant(Long id) {
         restaurantsRepository.deleteById(id);
+    }
+
+    @Override
+    public RestaurantDto getRestaurantByName(String name) {
+        return RestaurantDto.from(restaurantsRepository.findRestaurantByName(name).orElseThrow(() -> new NotFoundException("Restaurant with name: <" + name + "> not found")));
+    }
+
+    @Override
+    public void save(RestaurantDto restaurant){
+        //TODO: something with image idk
+//        if (restaurant.getImageUrl() == null || restaurant.getImageUrl().equals("")){
+//            restaurant.setImageUrl(ImageUtil.getImages("", 1).get(0));
+//        }
+        restaurantsRepository.save(RestaurantDto.to(restaurant));
     }
 }

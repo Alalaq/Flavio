@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class UserAddressController {
+public class UserAddressRestController {
     private final AddressService addressService;
     private final UserService userService;
 
@@ -27,7 +27,6 @@ public class UserAddressController {
         UserDto user = userService.getUserByEmail(principal.getName());
         //userService.updateUser(); TODO:add address to user somehow
         addressDto.setUserId(user.getId());
-        System.out.println(addressDto);
         addressService.saveAddress(addressDto);
     }
 

@@ -33,6 +33,9 @@ public class Restaurant {
     @Column(name = "general_rating", columnDefinition = "numeric(5,2)")
     private Double generalRating;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "price")
     private Price price;

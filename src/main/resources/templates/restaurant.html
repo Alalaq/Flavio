@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/images/mini-logo%20(1).svg">
+    <title id="restaurant-name" th:id="restaurant-name" th:text="${restaurantName}"></title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/main.js"></script>
+    <script defer src="../static/js/restaurant.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..."/>
+    <nav>
+        <ul>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a class="active" href="/admin-page">Users</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar"
+                                                                          src="/static/images/default-avatar.jpg"
+                                                                          alt="Profile"/></a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="restaurant-page">
+        <div class="restaurant-image-container">
+            <img class="restaurant-image" id="restaurant-image" alt="Restaurant Image">
+            <div class="restaurant-details-container">
+                <div class="image-gradient"></div>
+                <div id="restaurant-name-h2"></div>
+                <div class="restaurant-rating-button" id="restaurant-rating"></div>
+                <div id="restaurant-delivery-time" th:id="restaurant-delivery-time" th:text="${deliveryTime}" style="display: none"></div>
+                <div class="restaurant-distance-button" id="restaurant-distance-button-time"></div>
+                <button class="restaurant-info-button" onclick="toggleForm()">ⓘ</button>
+                <form id="restaurant-form" style="display:none;">
+                    <p id="restaurant-description"></p>
+                    <p><strong>Cuisine: </strong><span id="restaurant-cuisine"></span></p>
+                    <p><strong>Price Range: </strong><span id="restaurant-price"></span></p>
+                    <p><strong>Address: </strong><span id="restaurant-address"></span></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <aside class="menu">
+        <h2>Menu</h2>
+        <br>
+        <ul id="cuisines-menu">
+        </ul>
+    </aside>
+
+    <div id="dishes-container">
+    </div>
+
+    <div id="cart" class="cart" onchange="">
+        <h2>Cart</h2>
+        <br>
+        <ul id="cart-items">
+        </ul>
+    </div>
+</main>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

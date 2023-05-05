@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.khabibullin.dto.DishDto;
 import ru.kpfu.itis.khabibullin.repositories.DishesRepository;
 import ru.kpfu.itis.khabibullin.services.DishService;
+import ru.kpfu.itis.khabibullin.utils.API.ImageUtil;
 
 import java.util.List;
 
@@ -35,13 +36,22 @@ public class DishServiceImpl implements DishService {
     public List<DishDto> getDishesByPriceRange(Integer minPrice, Integer maxPrice) {
         return DishDto.from(dishRepository.findDishesByPriceBetween(minPrice, maxPrice));
     }
+
     @Override
     public void saveDish(DishDto dish) {
+        if (dish.getImageUrl() == null || dish.getImageUrl().equals("")){
+           dish.setImageUrl(ImageUtil.getImages(dish.getName(), 1).get(0));
+        }
         dishRepository.save(DishDto.to(dish));
     }
 
     @Override
     public void deleteDish(DishDto dish) {
         dishRepository.delete(DishDto.to(dish));
+    }
+
+    @Override
+    public List<DishDto> getDishesByRestaurantId(Long restaurantId) {
+        return DishDto.from(dishRepository.findDishesByRestaurantId(restaurantId));
     }
 }

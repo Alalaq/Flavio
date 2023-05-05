@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="/static/images/mini-logo%20(1).svg">
-    <title>Flavio</title>
+    <title>Title</title>
     <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../../static/js/main.js"></script>
 </head>
 <body>
-<header>
+<div th:fragment="head">
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
+    </div>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/registration">Sign up</a></li>
+            <li><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
         </ul>
     </nav>
-</header>
+</div>
 </body>
 </html>

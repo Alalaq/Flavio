@@ -25,6 +25,7 @@ public class RestaurantDto {
     private Price price;
     private String address;
     private String description;
+    private String imageUrl;
     private List<DishDto> dishes;
 
     public static Restaurant to(RestaurantDto dto) {
@@ -34,6 +35,7 @@ public class RestaurantDto {
                 .cuisineRatings(dto.getCuisineRatings())
                 .address(dto.getAddress())
                 .description(dto.getDescription())
+                .imageUrl(dto.imageUrl)
                 .dishes(dto.getDishes().stream()
                         .map(DishDto::to)
                         .collect(Collectors.toList()))
@@ -55,6 +57,7 @@ public class RestaurantDto {
                 .price(restaurant.getPrice())
                 .address(restaurant.getAddress())
                 .description(restaurant.getDescription())
+                .imageUrl(restaurant.getImageUrl())
                 .dishes(DishDto.from(restaurant.getDishes()))
                 .build();
     }

@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.utils;
+package ru.kpfu.itis.khabibullin.utils.API;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

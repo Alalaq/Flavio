@@ -1,9 +1,7 @@
 package ru.kpfu.itis.khabibullin.services;
 
 import ru.kpfu.itis.khabibullin.dto.DishDto;
-import ru.kpfu.itis.khabibullin.models.Dish;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface DishService {
@@ -13,4 +11,6 @@ public interface DishService {
     List<DishDto> getDishesByPriceRange(Integer minPrice, Integer maxPrice);
     void saveDish(DishDto dish);
     void deleteDish(DishDto dish);
+
+    List<DishDto> getDishesByRestaurantId(Long restaurantId);
 }

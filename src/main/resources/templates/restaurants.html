@@ -7,7 +7,7 @@
     <title>Flavio - Restaurants</title>
     <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../static/js/main.js"></script>
-    <script defer src="../static/js/restaurant.js"></script>
+    <script defer src="../static/js/restaurants.js"></script>
 </head>
 <body>
 <header>
@@ -103,16 +103,15 @@
                 <div th:each="restaurant : ${restaurants}" class="restaurant-item">
                     <div class="restaurant">
                         <img class="restaurant-image" th:src="@{'/static/images/' + ${restaurant.id} + '.jpg'}" alt="Restaurant Image">
-                        <h3><a th:href="@{/restaurants/{id}(id=${restaurant.id})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
-                        <p><strong>Rating:</strong> <span th:text="${restaurant.getGeneralRating()}"></span></p>
-                        <p><strong>Cuisines Rating:</strong> <span th:text="${restaurant.getCuisineRatings()}"></span></p>
-                        <p><strong>Address:</strong> <span th:text="${restaurant.getAddress()}"></span></p>
-                        <p><strong>Description:</strong> <span th:text="${restaurant.getDescription()}"></span></p>
-                        <p><strong>Price:</strong> <span th:text="${restaurant.price}"></span></p>
+                        <h3><a th:href="@{/restaurants/{name}(name=*{restaurant.name})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
+                        <p><strong>Rating:</strong> <span th:text="*{restaurant.getGeneralRating()}"></span></p>
+                        <p><strong>Cuisines Rating:</strong> <span th:text="*{restaurant.getCuisineRatings()}"></span></p>
+                        <p><strong>Address:</strong> <span th:text="*{restaurant.getAddress()}"></span></p>
+                        <p><strong>Description:</strong> <span th:text="*{restaurant.getDescription()}"></span></p>
+                        <p><strong>Price:</strong> <span th:text="*{restaurant.price}"></span></p>
                     </div>
                     <th:block th:if="${(restaurant.id + 1) % 3 == 0}"/>
                 </div><div class="restaurant-row">
-                </th:block>
             </div>
             </div>
         </div>
@@ -120,9 +119,6 @@
 
 
 </main>
-
-<div class="footer">
-    <p class="text-muted text-center mb-0" align="center">&copy; 2023 Flavio. All rights reserved.</p>
-</div>
+<div th:insert="~{footer :: foot}"></div>
 </body>
 </html>

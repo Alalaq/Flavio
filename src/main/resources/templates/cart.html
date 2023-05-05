@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/images/mini-logo%20(1).svg">
+    <title>Cart</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/main.js"></script>
+    <script defer src="../static/js/cart.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..."/>
+    <nav>
+        <ul>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li><a href="/profile"><img class="avatar"
+                                        src="/static/images/default-avatar.jpg"
+                                        alt="Profile"/></a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="cart-page">
+        <h2>Cart</h2>
+        <br>
+        <ul id="cart-items">
+        </ul>
+        <div class="cart-total-container">
+            <span class="cart-total-title">Total:</span>
+            <span class="cart-total-price" id="cart-total-price">$0.00</span>
+            <button class="order-button">Place Order</button>
+        </div>
+    </div>
+</main>
+</body>
+</html>
