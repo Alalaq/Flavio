@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/static/images/mini-logo%20(1).svg">
@@ -7,6 +7,7 @@
     <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../static/js/main.js"></script>
     <script defer src="../static/js/cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 </head>
 <body>
 <header>
@@ -27,12 +28,21 @@
     <div class="cart-page">
         <h2>Cart</h2>
         <br>
-        <ul id="cart-items">
-        </ul>
+        <div class="cartt">
+            <div th:each="dish : ${dishes}" class="cart-item">
+                <div class="dish">
+                    <img class="dish-image" th:src="*{dish.getImageUrl()}" alt="Dish Image">
+                    <p><strong>Name:</strong> <span th:text="*{dish.getName()}"></span></p>
+                    <p><strong>Cuisine:</strong> <span th:text="*{dish.getCuisine()}"></span></p>
+                    <p><strong>Price:</strong> <span class="cart-item-price" th:text="*{dish.getPrice()}"></span></p>
+                    <p><strong>Quantity:</strong> <span class="cart-item-quantity" th:text="*{dish.getQuantity()}"></span></p>
+                </div>
+            </div>
+        </div>
         <div class="cart-total-container">
             <span class="cart-total-title">Total:</span>
-            <span class="cart-total-price" id="cart-total-price">$0.00</span>
-            <button class="order-button">Place Order</button>
+            <span class="cart-total-price" id="cart-total-price">0.00₽</span>
+            <button class="order-button" onclick="placeOrder()">Place Order</button>
         </div>
     </div>
 </main>

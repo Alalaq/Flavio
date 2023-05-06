@@ -8,8 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kpfu.itis.khabibullin.utils.Role;
-import ru.kpfu.itis.khabibullin.utils.State;
+import ru.kpfu.itis.khabibullin.utils.enums.Role;
+import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,5 +68,17 @@ public class User {
     @Column(name = "state_of_user", nullable = false)
     private State state;
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthday=" + birthday +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", role=" + role +
+                ", state=" + state +
+                '}';
+    }
 }

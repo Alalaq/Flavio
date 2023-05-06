@@ -7,8 +7,8 @@ import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.repositories.RestaurantsRepository;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Set;

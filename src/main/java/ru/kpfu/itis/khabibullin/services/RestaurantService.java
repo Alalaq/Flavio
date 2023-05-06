@@ -1,8 +1,8 @@
 package ru.kpfu.itis.khabibullin.services;
 
 import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Set;

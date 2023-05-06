@@ -23,12 +23,12 @@
         </ul>
     </nav>
 </header>
-<div class="categories">
-    <ul>
-        <li><a href="#main-page">Main info</a></li>
-        <li><a href="#personal-info">Personal Information</a></li>
-        <li><a href="#security">Security</a></li>
-        <li><a href="#data-confidentiality">Data and Confidentiality</a></li>
+<div class="categories menu">
+    <ul class="uu">
+        <li><a href="#main-page" class="aa">Main info</a></li>
+        <li><a href="#personal-info" class="aa">Personal Information</a></li>
+        <li><a href="#security" class="aa">Security</a></li>
+        <li><a href="#data-confidentiality" class="aa">Orders</a></li>
     </ul>
 </div>
 
@@ -57,7 +57,7 @@
     </div>
 
     <div class="profile-info" id="personal-info">
-        <h1>Personal Information</h1>
+
 
 
 
@@ -90,10 +90,10 @@
         <button class="openButton" onclick="openForm('security-info')"><strong>Change Information</strong></button>
     </div>
 
-    <div class="profile-info" id="data-confidentiality" style="display:none;">
-        <h2>Data and Confidentiality</h2>
-        <p>Privacy settings: </p>
-        <button id="edit-data-confidentiality-info-btn">Change Information</button>
+    <div class="profile-info" id="orders" style="display:none;">
+        <br>
+        <ul id="user-orders" class="user-orders-list">
+        </ul>
     </div>
 </div>
 <div th:insert="~{footer :: foot}"></div>

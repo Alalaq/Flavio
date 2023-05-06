@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--TODO:change script from jQuery to pure js-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Charge</title>
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <!--Stripe JavaScript Library-->
+
+    <script defer src="../static/js/charge.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-light pt-5">
+<header>
+    <div class="logo">
+        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search for restaurants..." />
+    <nav>
+        <ul>
+            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>
+            <li><a href="/restaurants">Restaurants</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a class="active" href="/admin-page">Users</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>
+        </ul>
+    </nav>
+</header>
+<!--hero section-->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-12 my-auto mx-auto">
+                <p class="lead mb-4">
+                    Please fill the form below to complete the order payment
+                </p>
+                <div class="form">
+                <div class="card mb-4">
+                    <div class="card-body" th:object="${order}">
+                        <h5>Order Details</h5>
+                        <ul>
+                            <li>Order ID: <span th:text="${order.id}"></span></li>
+                            <li>Date: <span th:text="${order.date}"></span></li>
+                            <li>Total: <span th:text="${order.total}"></span></li>
+<!--                            <li>Restaurant: <span th:text="${order.restaurant.name}"></span></li>-->
+<!--                            <li>User: <span th:text="${order.user.username}"></span></li>-->
+                            <li>Dishes:
+                                <ul>
+                                    <li th:each="dish: ${order.dishes}" th:text="${dish.name}"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form action="#" id="payment-form" method="post">
+                    <input id="api-key" type="hidden" th:value="${stripePublicKey}">
+                    <div class="form-group">
+                        <label class="font-weight-medium" for="card-element">
+                            Enter credit or debit card below
+                        </label>
+                        <br>
+                        <div class="w-100" id="card-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="email">
+                        <h5>Enter email:</h5>
+                            <input class="formEmail" id="email" name="email"
+                                   placeholder="Email Address" type="email" required>
+                    </div>
+                    <!-- Used to display Element errors. -->
+                    <div class="text-danger w-100" id="card-errors" role="alert"></div>
+                    <div class="btnBuy pt-2">
+                        <button class="btn btn-primary btn-block" id="submitButton" type="submit">
+                            Pay With Your Card
+                        </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

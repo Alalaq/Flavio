@@ -1,0 +1,179 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Section styles */
+section {
+    padding: 50px 0;
+}
+
+/* Card styles */
+.card-body h5 {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.card-body ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.card-body li{
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.card-body .lead {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+/* Form styles */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+#card-element {
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 300px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin-left: 50px;
+}
+.formEmail{
+    padding: 10px;
+    height: 40px;
+    width: 200px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+.email{
+    margin: 20px;
+}
+.email h5{
+    font-size: 14px;
+}
+.btnBuy{
+    padding: 10px;
+    margin: 5px;
+    height: 20px;
+    width: 70px;
+}
+
+#card-errors {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: #454545;
+    color: #c9c6c6;
+    border:none;
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+    border-color: #ffffff;
+}
+.lead{
+    padding-left: 10px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.btn-block {
+    display: block;
+    width: 400px;
+    margin-left: 20px;
+}
+.email input{
+    width: 300px;
+    height: 25px;
+    margin-left: 50px;
+    margin-top: 10px;
+    padding: 5px;
+}
+/* Small text styles */
+.small {
+    font-size: 0.8rem;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+.small a {
+    color: #999;
+    text-decoration: underline;
+}
+
+.small a:hover {
+    color: #666;
+}
+
+/* Hero section styles */
+.hero {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 991.98px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+}
+.form-control{
+    height: 50px;
+    width: 200px;
+    border-bottom: 3px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.container{
+    margin-left: 560px;
+}
+.form{
+    background-color: #ffffff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    width: 500px;
+    height: 500px;
+}
+.success{
+    text-align: center;
+}
+.containerPay{
+    background-color: #ffffff;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    width: 500px;
+    height: 300px;
+    margin-left: 500px;
+    text-align: center;
+}
+.back a{
+    text-decoration: none;
+    border-bottom: 1px solid #454545;
+    margin-left: 280px;
+    color: #454545;
+}
+.back a:hover{
+    color: black;
+    cursor: pointer;
+}

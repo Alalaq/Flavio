@@ -147,3 +147,13 @@ VALUES
     ('Bibimbap', 'KOREAN', 'Korean rice bowl topped with vegetables, beef, and egg', 1590, 1, false, NULL),
     ('Korean Fried Chicken', 'KOREAN', 'Crispy fried chicken with a spicy glaze', 1350, 1, false, NULL),
     ('Japchae', 'KOREAN', 'Stir-fried glass noodles with vegetables and beef', 1190, 1, false, NULL);
+
+
+SELECT o.* FROM orders o
+             WHERE user_id = :userId
+              AND restaurant_id = :restaurantId
+              AND total = :total
+
+
+
+

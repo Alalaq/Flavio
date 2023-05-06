@@ -1,4 +1,4 @@
-package ru.kpfu.itis.khabibullin.utils;
+package ru.kpfu.itis.khabibullin.utils.enums;
 
 public enum State {
     NOT_CONFIRMED,

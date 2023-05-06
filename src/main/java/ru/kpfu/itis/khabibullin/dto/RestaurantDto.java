@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Map;
@@ -36,9 +36,7 @@ public class RestaurantDto {
                 .address(dto.getAddress())
                 .description(dto.getDescription())
                 .imageUrl(dto.imageUrl)
-                .dishes(dto.getDishes().stream()
-                        .map(DishDto::to)
-                        .collect(Collectors.toList()))
+                .dishes(DishDto.toList(dto.getDishes()))
                 .build();
     }
 

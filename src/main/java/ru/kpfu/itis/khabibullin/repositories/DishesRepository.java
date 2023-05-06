@@ -12,4 +12,7 @@ public interface DishesRepository extends JpaRepository<Dish, Long> {
     List<Dish> findByNameContainingIgnoreCase(String name);
 
     List<Dish> findDishesByRestaurantId(Long id);
+
+    List<Dish> findAllByNameIn(List<String> names);
+
 }

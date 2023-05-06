@@ -207,9 +207,6 @@ async function uploadAddressData() {
     const response = await fetch(`/addresses`);
     const addresses = await response.json();
 
-    console.log(response);
-    console.log(addresses);
-
     for (let i = 0; i < addresses.length; i++) {
         const address = addresses[i];
         addressHTML += `
@@ -222,4 +219,31 @@ async function uploadAddressData() {
     addressInfoTile.innerHTML = addressHTML;
 }
 
+document.addEventListener('DOMContentLoaded', uploadOrdersData);
 
+async function uploadOrdersData() {
+    const addressInfoTile = document.querySelector(".user-orders-list");
+    let ordersHTML = "<h2>Orders</h2>";
+
+    const response = await fetch(`/orders`);
+    console.log(response);
+
+    const orders = await response.json();
+
+    console.log(orders);
+
+    for (let i = 0; i < orders.length; i++) {
+        const order = orders[i];
+        ordersHTML += `
+    <div class="orders-field">
+      <p> ${order.date}, ${order.total}, ${order.state}</p>
+    </div>
+  `;
+        for (let j = 0; j < order.dishes.length; j++) {
+            const dish = dishes[j];
+            ordersHTML += '<div class="orders-dish"><p> ${dish}</p></div>'
+        }
+    }
+    ordersHTML += ' <button class="openButton" onclick="openForm(\'address-info\')"><strong>Change Information</strong></button>';
+    addressInfoTile.innerHTML = ordersHTML;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Payment Success</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+<!--<header>-->
+<!--    <div class="logo">-->
+<!--        <h1><a class="logoLink" href="/homepage">Flavio</a></h1>-->
+<!--    </div>-->
+<!--    <nav>-->
+<!--        <ul>-->
+<!--            <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>-->
+<!--            <li sec:authorize="!isAuthenticated()"><a class="active" href="/login">Sign in</a></li>-->
+<!--            <li><a href="/restaurants">Restaurants</a></li>-->
+<!--            <li sec:authorize="hasAuthority('ADMIN')"><a class="active" href="/admin-page">Users</a></li>-->
+<!--            <li sec:authorize="isAuthenticated()"><a href="/profile"><img class="avatar" src="/static/images/default-avatar.jpg" alt="Profile" /></a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</header>-->
+<div class="success">
+    <h1>Payment Success</h1>
+    <p>Thank you for your payment.</p>
+</div>
+<div class="containerPay">
+    <div class="card">
+        <div class="card-body" th:object="${order}">
+            <h5>Order Details</h5>
+            <ul>
+                <li>Order ID: <span th:text="${order.getId()}"></span></li>
+                <li>Date: <span th:text="${order.getDate()}"></span></li>
+                <li>Total: <span th:text="${order.getTotal()}"></span></li>
+<!--                TODO: make somehow restaurant to show-->
+<!--                <li>Restaurant: <span th:text="${order.restaurant.name}"></span></li>-->
+                <!--                            <li>User: <span th:text="${order.user.username}"></span></li>-->
+                <li>Dishes:
+                    <ul>
+                        <li th:each="dish: ${order.getDishes()}" th:text="${dish.getName()}"></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <small class="back"><a href="/restaurants">Return to Restaurants</a></small>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

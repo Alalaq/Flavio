@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
 import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Set;
@@ -51,6 +51,8 @@ public class RestaurantController {
         return "restaurants";
     }
 
+
+    //TODO: handle delivery time
     @GetMapping("/{restaurantName}")
     public String getRestaurantPage(@PathVariable String restaurantName,
                                     Model model){

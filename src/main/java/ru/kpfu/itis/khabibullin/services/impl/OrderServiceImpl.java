@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.khabibullin.dto.OrderDto;
+import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
 import ru.kpfu.itis.khabibullin.dto.UserDto;
-import ru.kpfu.itis.khabibullin.models.Order;
-import ru.kpfu.itis.khabibullin.models.User;
 import ru.kpfu.itis.khabibullin.repositories.OrdersRepository;
 import ru.kpfu.itis.khabibullin.services.OrderService;
+import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrdersByUser(UserDto user) {
-        return OrderDto.from(ordersRepository.findByUser(UserDto.to(user)));
+    public List<OrderDto> getOrdersByUserId(Long id) {
+        return OrderDto.from(ordersRepository.findByUserId(id));
     }
 
     @Override
@@ -42,5 +43,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrder(OrderDto order) {
         ordersRepository.delete(OrderDto.to(order));
+    }
+
+    @Override
+    public OrderDto findByUserIdAndRestaurantIdAndTotalAndState(UserDto user, RestaurantDto restaurant, int total, StateOfOrder state, LocalDateTime date) {
+        return OrderDto.from(ordersRepository.findByUserIdAndRestaurantIdAndTotalAndStateAndDate(UserDto.to(user), RestaurantDto.to(restaurant), total, state, date));
     }
 }

@@ -129,7 +129,21 @@ const cart = document.getElementById('cart');
 const paymentButton = document.createElement('button')
 paymentButton.textContent = 'Go to payment';
 paymentButton.id = 'payment';
-paymentButton.onclick = goToCart;
+
+paymentButton.addEventListener('click', () => {
+    const cartItems = Array.from(document.querySelectorAll('.cart-item'));
+    const dishDtos = cartItems.map(cartItem => {
+        const dishName = cartItem.querySelector('.cart-p:first-child').textContent;
+        const dishPrice = cartItem.querySelector('.cart-p.price').textContent;
+        const dishQuantity = cartItem.querySelector('.quantity').textContent;
+        return {
+            name: dishName,
+            price: dishPrice,
+            quantity: dishQuantity
+        };
+    });
+    goToCart(dishDtos);
+});
 
 cartItems.appendChild(noItemsMessage);
 
@@ -141,7 +155,8 @@ dishesContainer.addEventListener('click', event => {
     if (event.target.classList.contains('add-to-cart-button')) {
         const dishItem = event.target.closest('.dishes-card');
         const dishName = dishItem.querySelector('h3').textContent;
-        const dishPrice = dishItem.querySelector('p').textContent;
+        const dishPrice = dishItem.querySelector('p').textContent.replace(/[^0-9.-]+/g,"");
+
 
         // Check if the item already exists in the cart
         const existingCartItem = Array.from(cartItems.children).find(cartItem => {
@@ -194,7 +209,6 @@ cartItems.addEventListener('click', event => {
         cartItems.appendChild(noItemsMessage);
         cart.removeChild(paymentButton)
         cart.removeChild(totalPrice)
-        localStorage.removeItem()
     } else {
         totalPrice.textContent = "Total price: " + calculateCartTotal().toString() + "₽";
     }
@@ -213,7 +227,17 @@ function calculateCartTotal() {
 }
 
 
-function goToCart() {
-    window.location.href = '/cart'; // replace with the actual URL of your cart page
+function goToCart(cartData) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/cart', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location.href = '/cart';
+        }
+    };
+    xhr.send(JSON.stringify(cartData));
 }
+
+
 

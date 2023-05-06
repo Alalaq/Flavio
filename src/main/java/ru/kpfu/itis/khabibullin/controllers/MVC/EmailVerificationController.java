@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.services.UserService;
-import ru.kpfu.itis.khabibullin.utils.State;
+import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 @Controller
 public class EmailVerificationController {

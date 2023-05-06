@@ -11,22 +11,23 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ImageUtil {
     private static final String UNSPLASH_API_URL = "https://api.unsplash.com/search/photos";
-    private static final String UNSPLASH_API_KEY = "ui0bPySHKmmnKoe6mkGW6MeUPj_ZBdYPwbtEjX1nspw";
+    private static final String API_KEY_ENV_VAR_NAME = "UNPLASH_API_KEY";
 
     public static List<String> getImages(String query, int count) {
         OkHttpClient client = new OkHttpClient();
         List<String> imageUrls = new ArrayList<>();
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(UNSPLASH_API_URL).newBuilder();
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(UNSPLASH_API_URL)).newBuilder();
         urlBuilder.addQueryParameter("query", query);
         urlBuilder.addQueryParameter("per_page", String.valueOf(count));
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
                 .url(url)
-                .header("Authorization", "Client-ID " + UNSPLASH_API_KEY)
+                .header("Authorization", "Client-ID " + System.getenv(API_KEY_ENV_VAR_NAME))
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

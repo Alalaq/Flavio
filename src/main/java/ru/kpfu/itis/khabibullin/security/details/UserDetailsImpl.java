@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.kpfu.itis.khabibullin.models.User;
-import ru.kpfu.itis.khabibullin.utils.State;
+import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.util.Collection;
 import java.util.Collections;

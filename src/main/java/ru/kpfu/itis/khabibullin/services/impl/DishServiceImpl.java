@@ -54,4 +54,9 @@ public class DishServiceImpl implements DishService {
     public List<DishDto> getDishesByRestaurantId(Long restaurantId) {
         return DishDto.from(dishRepository.findDishesByRestaurantId(restaurantId));
     }
+
+    @Override
+    public List<DishDto> getDishesByNames(List<String> dishNames) {
+        return DishDto.from(dishRepository.findAllByNameIn(dishNames));
+    }
 }

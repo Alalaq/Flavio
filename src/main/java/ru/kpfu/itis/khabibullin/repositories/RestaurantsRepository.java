@@ -3,8 +3,8 @@ package ru.kpfu.itis.khabibullin.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +31,17 @@ public class Order {
 
     @NotNull
     @Column(nullable = false, precision = 10, scale = 2, name = "total")
-    private BigDecimal total;
+    private int total;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private User user;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "state")
+    private StateOfOrder state;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -50,10 +55,23 @@ public class Order {
     private List<Dish> dishes = new ArrayList<>();
 
 
-
-
     @PrePersist
     private void setOrderDate() {
-        this.date = LocalDateTime.now();
+        this.date = (LocalDateTime.now());
     }
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", date=" + date +
+                ", total=" + total +
+                ", userId=" + user.getId() +
+                ", state=" + state +
+                ", restaurantId=" + restaurant.getId() +
+                ", dishes=" + dishes +
+                '}';
+    }
+
 }

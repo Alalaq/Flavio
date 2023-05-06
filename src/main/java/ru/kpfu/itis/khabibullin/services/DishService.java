@@ -13,4 +13,6 @@ public interface DishService {
     void deleteDish(DishDto dish);
 
     List<DishDto> getDishesByRestaurantId(Long restaurantId);
+
+    List<DishDto> getDishesByNames(List<String> dishNames);
 }

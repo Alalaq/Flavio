@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -48,5 +48,18 @@ public class Dish {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cuisine=" + cuisine +
+                ", price=" + price +
+                ", restaurant=" + restaurant.getName() +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 
 }

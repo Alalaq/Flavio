@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
-import ru.kpfu.itis.khabibullin.utils.Price;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,4 +58,21 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Dish> dishes = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", generalRating=" + generalRating +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", price=" + price +
+                ", cuisineRatings=" + cuisineRatings +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", dishes=" + dishes +
+                '}';
+    }
+
 }

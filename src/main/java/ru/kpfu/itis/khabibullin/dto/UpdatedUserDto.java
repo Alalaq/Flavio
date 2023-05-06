@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.models.Order;
-import ru.kpfu.itis.khabibullin.utils.Role;
-import ru.kpfu.itis.khabibullin.utils.State;
+import ru.kpfu.itis.khabibullin.utils.enums.Role;
+import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.time.LocalDate;
 import java.util.List;

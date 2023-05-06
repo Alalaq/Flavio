@@ -6,8 +6,8 @@ import ru.kpfu.itis.khabibullin.dto.SignUpDto;
 import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.dto.UserDto;
 import ru.kpfu.itis.khabibullin.services.UserService;
-import ru.kpfu.itis.khabibullin.utils.Role;
-import ru.kpfu.itis.khabibullin.utils.State;
+import ru.kpfu.itis.khabibullin.utils.enums.Role;
+import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.util.List;
 import java.util.Objects;

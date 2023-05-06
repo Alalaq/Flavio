@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kpfu.itis.khabibullin.models.Dish;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
-import ru.kpfu.itis.khabibullin.models.Review;
-import ru.kpfu.itis.khabibullin.utils.Cuisine;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,6 +27,7 @@ public class DishDto {
     private boolean isVegetarian;
     private String imageUrl;
 
+    //TODO: handle case with null reviews
     public static DishDto from(Dish dish) {
         return DishDto.builder()
                 .id(dish.getId())
@@ -36,9 +36,7 @@ public class DishDto {
                 .description(dish.getDescription())
                 .price(dish.getPrice())
                 .restaurantId(dish.getRestaurant().getId())
-                .reviewIds(dish.getReviews().stream()
-                        .map(Review::getId)
-                        .collect(Collectors.toList()))
+               // .reviewIds(ReviewDto.from(dish.getReviews()))
                 .isVegetarian(dish.isVegetarian())
                 .imageUrl(dish.getImageUrl())
                 .build();
@@ -68,4 +66,20 @@ public class DishDto {
                 .map(DishDto::to)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return "DishDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cuisine='" + cuisine + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", restaurantId=" + restaurantId +
+                ", reviewIds=" + reviewIds +
+                ", isVegetarian=" + isVegetarian +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
+
 }
