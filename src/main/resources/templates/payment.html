@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/payment.css" rel="stylesheet">
+    <script defer src="../static/js/payment.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Payment Form</h1>
+    <form action="/process-payment" method="POST">
+        <div class="form-group">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6-month">
+                <label for="expiryMonth">Expiry Month:</label>
+                <input type="text" class="form-control" id="expiryMonth" name="expiryMonth">
+            </div>
+            <div class="form-group col-md-6-year">
+                <label for="expiryYear">Expiry Year:</label>
+                <input type="text" class="form-control" id="expiryYear" name="expiryYear">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cardNumber">CVV/CVC code:</label>
+            <input type="hidden" id="cvv" name="cvv">
+        </div>
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+</div>
+</body>
+</html>

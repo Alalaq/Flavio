@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AddressUtil {
     private static final String GEOCODE_API_URL = "https://api.opencagedata.com/geocode/v1/json";
-    private static final String API_KEY = "3113fa636f4d44e29faa3c1eb4553fce";
+    private static final String API_KEY_ENV_VAR_NAME = "OPENCAGE_API_KEY";
     private static final int EARTH_RADIUS = 6371; // km
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -68,7 +68,7 @@ public class AddressUtil {
 
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(GEOCODE_API_URL))
                 .newBuilder()
-                .addQueryParameter("key", API_KEY)
+                .addQueryParameter("key", System.getenv(API_KEY_ENV_VAR_NAME))
                 .addQueryParameter("q", address)
                 .build();
 
