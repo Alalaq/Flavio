@@ -13,6 +13,7 @@ import ru.kpfu.itis.khabibullin.models.User;
 import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,10 +113,10 @@ public class OrderDto {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         sb.append("\"id\":").append(id).append(",");
-        sb.append("\"date\":\"").append(date).append("\",");
+        sb.append("\"date\":\"").append(date.truncatedTo(ChronoUnit.SECONDS).toString().replace("T", " ")).append("\",");
         sb.append("\"total\":").append(total).append(",");
         sb.append("\"userId\":").append(userId).append(",");
-        sb.append("\"state\":\"").append(state).append("\",");
+        sb.append("\"state\":\"").append(Character.toUpperCase(state.toString().charAt(0))).append(state.toString().substring(1).replace("_", " ").toLowerCase()).append("\",");
         sb.append("\"restaurantId\":").append(restaurantId).append(",");
         sb.append("\"dishes\":[");
         for (int i = 0; i < dishes.size(); i++) {
@@ -144,5 +145,25 @@ public class OrderDto {
         mapper.registerModule(new JavaTimeModule());
         return mapper.writeValueAsString(orderDto.toJsonString());
     }
+
+    public static String toJsonString(List<OrderDto> orderDtos) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < orderDtos.size(); i++) {
+            sb.append(orderDtos.get(i).toJsonString());
+            if (i < orderDtos.size() - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static String toJsonStringUsingToString(List<OrderDto> orderDtos) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        return mapper.writeValueAsString(toJsonString(orderDtos));
+    }
+
 
 }

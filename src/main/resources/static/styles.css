@@ -1419,3 +1419,75 @@ input[type="hidden"] {
     margin-left: 10px;
     padding-left: 10px;
 }
+
+.orders-dish-image{
+    width: 300px;
+    height: 200px;
+}
+
+.user-orders-list {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 20px;
+}
+
+.orders-info-field {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.orders-info-field p {
+    margin: 5px 0;
+}
+
+.orders-info-field-dishes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.orders-dish {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.orders-dish p {
+    margin: 5px 0;
+}
+
+.orders-dish-image {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+
+/* Style for the "Order is delivered" and "Make a review" buttons */
+.order-delivered-btn,
+.make-review-btn {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Style for the "Cancel order" button */
+.cancel-order-btn {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}

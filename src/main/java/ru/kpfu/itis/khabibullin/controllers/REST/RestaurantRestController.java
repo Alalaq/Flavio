@@ -16,4 +16,9 @@ public class RestaurantRestController {
     public RestaurantDto getRestaurantByName(@PathVariable String restaurantName){
         return restaurantService.getRestaurantByName(restaurantName.replace("%20", " "));
     }
+
+    @GetMapping("/restaurant/get/{restaurantId}")
+    public RestaurantDto getRestaurantById(@PathVariable Long restaurantId){
+        return restaurantService.getRestaurantById(restaurantId);
+    }
 }

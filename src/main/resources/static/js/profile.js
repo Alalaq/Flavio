@@ -67,7 +67,7 @@ function openForm(tile) {
                     deleteButton.innerText = "Delete";
                     deleteButton.addEventListener("click", async () => {
                         // Send a request to the server to delete the address
-                        const response = await fetch(`/addresses/delete?address_id=`+ address.id, {
+                        const response = await fetch(`/addresses/delete?address_id=` + address.id, {
                             method: "DELETE",
                         });
 
@@ -222,28 +222,92 @@ async function uploadAddressData() {
 document.addEventListener('DOMContentLoaded', uploadOrdersData);
 
 async function uploadOrdersData() {
-    const addressInfoTile = document.querySelector(".user-orders-list");
+    const orderTile = document.querySelector(".user-orders-list");
     let ordersHTML = "<h2>Orders</h2>";
 
     const response = await fetch(`/orders`);
-    console.log(response);
+    const orders = await response.text();
+    const ordersObjString = JSON.parse(orders);
 
-    const orders = await response.json();
+    const ordersObj = JSON.parse(ordersObjString);
 
-    console.log(orders);
 
-    for (let i = 0; i < orders.length; i++) {
-        const order = orders[i];
+    for (const order of ordersObj) {
+        // Make an API call to get the restaurant name, including cookies in the request
+        const restaurantResponse = await fetch(`/restaurant/get/${order.restaurantId}`, {
+            credentials: "include"
+        });
+        const restaurantData = await restaurantResponse.json();
+        const restaurantName = restaurantData.name;
+
+        ;
+
         ordersHTML += `
-    <div class="orders-field">
-      <p> ${order.date}, ${order.total}, ${order.state}</p>
-    </div>
-  `;
-        for (let j = 0; j < order.dishes.length; j++) {
-            const dish = dishes[j];
-            ordersHTML += '<div class="orders-dish"><p> ${dish}</p></div>'
+        <div class="orders-info-field">
+            <p>Restaurant: ${restaurantName}</p>
+            <p>Date of order: ${order.date}</p>
+            <p>State of order: ${order.state}</p>
+            <p>Total: ${order.total}₽</p>
+    `;
+
+        if (order.state === "Confirmed") {
+            ordersHTML += `
+            <button class="order-delivered-btn" onclick="changeStateToDelivered(${order.id})">Order is delivered</button>
+            <button class="cancel-order-btn" onclick="confirmCancellation(${order.id})">Cancel order</button>
+        `;
+        } else if (order.state === "Delivered") {
+            ordersHTML += `
+            <button class="make-review-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
+        `;
+        }
+
+        ordersHTML += `
+        </div>
+        <h3>Dishes:</h3>
+        <div class="orders-info-field-dishes">
+    `;
+        for (const dish of order.dishes) {
+            ordersHTML += `
+        <div class="orders-dish">
+          <p>${dish.name} - ${dish.price}₽</p>
+          <img class="orders-dish-image" src="${dish.imageUrl}" alt="Dish Image">
+        </div>
+      `;
+        }
+        ordersHTML += `
+      </div>
+      <br>
+    `;
+    }
+
+    orderTile.innerHTML = ordersHTML;
+}
+
+async function changeStateToDelivered(orderId) {
+    const response = await fetch(`/orders/changeState/${orderId}/Delivered`, {
+        credentials: "include"
+    });
+    if (response.ok) {
+        location.reload();
+    } else {
+        console.error("Failed to change the order state to Delivered");
+    }
+}
+
+async function confirmCancellation(orderId) {
+    const isConfirmed = confirm("Are you sure you want to cancel this order?");
+    if (isConfirmed) {
+        const response = await fetch(`/orders/changeState/${orderId}/Canceled`, {
+            credentials: "include"
+        });
+        if (response.ok) {
+            location.reload();
+        } else {
+            console.error("Failed to cancel order");
         }
     }
-    ordersHTML += ' <button class="openButton" onclick="openForm(\'address-info\')"><strong>Change Information</strong></button>';
-    addressInfoTile.innerHTML = ordersHTML;
+}
+
+//TODO: Display the review form for the selected order
+function displayReviewForm(orderId) {
 }

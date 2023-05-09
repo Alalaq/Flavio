@@ -42,5 +42,7 @@
 - alisher.khabibullin@gmail.com
 - Telegram: @KhabiBully
 
+## Special thanks to Ksenia Katargina (@kkkseniaaa03) for her help with the design of the project.
+
 ## License
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+This project is licensed under the ITIS License - see the `LICENSE` file for details.
