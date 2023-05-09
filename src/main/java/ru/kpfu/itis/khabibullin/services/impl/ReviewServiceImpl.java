@@ -44,6 +44,16 @@ public class ReviewServiceImpl implements ReviewService {
     public void deleteReview(long id) {
         reviewsRepository.deleteById(id);
     }
+
+    @Override
+    public void saveAll(List<ReviewDto> reviews) {
+       reviewsRepository.saveAll(ReviewDto.to(reviews));
+    }
+
+    @Override
+    public ReviewDto getReviewByOrderId(Long orderId) {
+        return ReviewDto.from(reviewsRepository.findFirstByOrderId(orderId));
+    }
 }
 
 

@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kpfu.itis.khabibullin.models.Dish;
-import ru.kpfu.itis.khabibullin.models.Review;
+import ru.kpfu.itis.khabibullin.models.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 @Builder
 public class ReviewDto {
     private Long id;
-    private String username;
+    private Long userId;
+    private Long restaurantId;
+    private Long orderId;
     private String comment;
     private int rating;
     private Dish dish;
@@ -26,7 +28,9 @@ public class ReviewDto {
     public static Review to(ReviewDto dto) {
         return Review.builder()
                 .id(dto.getId())
-                .username(dto.getUsername())
+                .user(User.builder().id(dto.getUserId()).build())
+                .restaurant(Restaurant.builder().id(dto.restaurantId).build())
+                .order(Order.builder().id(dto.getOrderId()).build())
                 .comment(dto.getComment())
                 .rating(dto.getRating())
                 .dish(Dish.builder().id(dto.getDish().getId()).build())
@@ -42,7 +46,9 @@ public class ReviewDto {
     public static ReviewDto from(Review review) {
         return ReviewDto.builder()
                 .id(review.getId())
-                .username(review.getUsername())
+                .userId(review.getUser().getId())
+                .restaurantId(review.getRestaurant().getId())
+                .orderId(review.getOrder().getId())
                 .comment(review.getComment())
                 .rating(review.getRating())
                 .dish(review.getDish())

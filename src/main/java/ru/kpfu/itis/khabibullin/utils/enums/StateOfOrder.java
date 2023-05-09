@@ -7,7 +7,8 @@ public enum StateOfOrder {
     CONFIRMED("Confirmed"),
     DELIVERED("Delivered"),
     CANCELED("Canceled"),
-    FAILED_PAYMENT("Failed payment");
+    FAILED_PAYMENT("Failed payment"),
+    REVIEWED("Reviewed");
 
     private final String value;
 

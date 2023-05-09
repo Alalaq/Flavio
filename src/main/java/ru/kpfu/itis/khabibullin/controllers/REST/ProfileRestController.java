@@ -58,7 +58,6 @@ public class ProfileRestController {
     @PostMapping("/addresses/add")
     public void addAddressByUser(@RequestBody AddressDto addressDto, Principal principal) {
         UserDto user = userService.getUserByEmail(principal.getName());
-        //userService.updateUser(); TODO:add address to user somehow
         addressDto.setUserId(user.getId());
         addressService.saveAddress(addressDto);
     }

@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kpfu.itis.khabibullin.models.Dish;
+import ru.kpfu.itis.khabibullin.models.Restaurant;
+import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 
 import java.math.BigDecimal;
 /**
@@ -22,4 +25,16 @@ public class CartDishDto {
     private Long restaurantId;
     private int quantity;
     private String imageUrl;
+
+    public static Dish toDish(CartDishDto dishDto){
+        return Dish.builder()
+                .id(dishDto.getId())
+                .name(dishDto.getName())
+                .cuisine(Cuisine.valueOf(dishDto.getCuisine().toUpperCase()))
+                .description(dishDto.getDescription())
+                .price(dishDto.getPrice())
+                .restaurant(Restaurant.builder().id(dishDto.getRestaurantId()).build())
+                .imageUrl(dishDto.getImageUrl())
+                .build();
+    }
 }

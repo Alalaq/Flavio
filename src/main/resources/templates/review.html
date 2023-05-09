@@ -1,0 +1,59 @@
+<!--
+  ~ /**
+  ~ * Copyright (c) 2023.
+  ~  * @author Khabibullin Alisher (Alalaq)
+  ~  *
+  ~  * All rights are reserved by ITIS institute.
+  ~  */
+  -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Order Feedback</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <script defer src="../static/js/review.js"></script>
+</head>
+<body>
+<h1>Order Feedback</h1>
+<h2 th:text="Order + ${order.getId()}"> </h2>
+<form th:action="@{/review/{orderId}/{userId}(orderId=${orderId}, userId=${userId})}" method="POST">
+    <input type="hidden" name="orderId" th:value="${order.getId()}">
+
+    <table>
+        <thead>
+        <tr>
+            <th>Dish</th>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dish : ${order.dishes}" th:id="${dish.id}">
+            <td th:text="${dish.name}"></td>
+            <td>
+                <select th:name="'ratings[' + ${dish.id} + ']'" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </td>
+            <td>
+                <textarea th:name="'comments[' + ${dish.id} + ']'" ></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <label for="order-comment">Order Comment:</label>
+    <br>
+    <textarea id="order-comment" name="orderComment"></textarea>
+    <br><br>
+    <input id="submitButton" type="submit" value="Submit Feedback" onclick="gratitude()">
+</form>
+</body>
+</html>

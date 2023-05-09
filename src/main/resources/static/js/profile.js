@@ -251,7 +251,7 @@ async function uploadOrdersData() {
         const restaurantData = await restaurantResponse.json();
         const restaurantName = restaurantData.name;
 
-        ;
+
         let state = order.state;
         state = state.toString();
         state = state.charAt(0).toUpperCase() + state.substring(1).replace("_", " ").toLowerCase();
@@ -271,9 +271,13 @@ async function uploadOrdersData() {
         `;
         } else if (state === "Delivered") {
             ordersHTML += `
-            <button class="make-review-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
+            <button class="make-review-btn" onclick="displayReviewForm(${order.id}, ${order.userId})">Make a review</button>
         `;
-         } // TODO: idk maybe make something like "order again" or pay an order or delete order idk rly
+         } else if (state === "Reviewed") {
+            ordersHTML += `
+            <p>Thanks for your contribution!</p>
+        `;
+        } // TODO: idk maybe make something like "order again" or pay an order or delete order idk rly
         // else if (state === "Not Confirmed"){
         //     ordersHTML += `
         //     <button class="delete-order-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
@@ -326,6 +330,7 @@ async function confirmCancellation(orderId) {
     }
 }
 
-//TODO: Display the review form for the selected order
-function displayReviewForm(orderId) {
+
+function displayReviewForm(orderId, userId) {
+    window.location.href = "/review/" + orderId + "/" + userId;
 }

@@ -13,5 +13,9 @@ public interface ReviewService {
     List<ReviewDto> getReviewsByDish(DishDto dish);
     void saveReview(ReviewDto review);
     void deleteReview(long id);
+
+    void saveAll(List<ReviewDto> reviews);
+
+    ReviewDto getReviewByOrderId(Long orderId);
 }
 

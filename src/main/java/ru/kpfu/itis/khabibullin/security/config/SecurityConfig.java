@@ -35,11 +35,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
                 http
-                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurant/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error", "/dishes/**", "/cart", "/process-payment", "/create-charge", "/charge", "/orders/**")
+                        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurant/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error", "/dishes/**", "/cart", "/process-payment", "/create-charge", "/charge", "/orders/**", "/review/**")
                         .and()
                         .authorizeHttpRequests()
                         .requestMatchers("/homepage", "/login", "/registration", "/restaurants", "/auth/check-authentication", "/verify-email/**", "/error", "/").permitAll()
-                        .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**", "/process-payment", "/payment-success", "/dishes/**", "/orders/**","/addresses/**", "/getCurrentUserId").authenticated()
+                        .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**", "/process-payment", "/payment-success", "/dishes/**", "/orders/**","/addresses/**", "/getCurrentUserId", "/review/**").authenticated()
                         .requestMatchers("/admin-page", "/api/users/**").hasAuthority("ADMIN")
                         .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                         .and().logout().logoutUrl("/myLogout")
