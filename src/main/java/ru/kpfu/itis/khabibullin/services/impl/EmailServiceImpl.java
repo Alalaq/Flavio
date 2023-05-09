@@ -25,18 +25,5 @@ public class EmailServiceImpl implements EmailService {
 
         mailSender.send(message);
     }
-
-//    public void sendEmail(String to,
-//                          String subject,
-//                          String body) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("emailverifier74@gmail.com");
-//        message.setTo(to);
-//        message.setText(body);
-//        message.setSubject(subject);
-//
-//        mailSender.send(message);
-//
-//    }
 }
 

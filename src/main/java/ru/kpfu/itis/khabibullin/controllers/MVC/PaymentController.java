@@ -21,6 +21,7 @@ import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -95,12 +96,12 @@ public class PaymentController {
         }
 
         if (token == null) {
-            currentOrder.setState(StateOfOrder.FAILED_PAYMENT);
+            Objects.requireNonNull(currentOrder).setState(StateOfOrder.FAILED_PAYMENT);
             orderService.saveOrder(currentOrder);
             return ResponseEntity.badRequest().body("Stripe payment token is missing. Please, try again later.");
         }
 
-        String chargeId = stripeService.createCharge(email, token, currentOrder.getTotal());
+        String chargeId = stripeService.createCharge(email, token, Objects.requireNonNull(currentOrder).getTotal());
         if (chargeId == null) {
             currentOrder.setState(StateOfOrder.FAILED_PAYMENT);
             orderService.saveOrder(currentOrder);

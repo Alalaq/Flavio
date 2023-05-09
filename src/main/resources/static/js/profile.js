@@ -27,6 +27,7 @@ function openForm(tile) {
 
     // Add tile-specific fields to the form based on the specified tile
     if (tile === "basic-info") {
+        //TODO: if email is updated, send verification to email
         tileFields.innerHTML = `
             <label for="avatar"><b>Avatar</b></label>
             <input type="file" name="avatar" id="avatar">
@@ -43,7 +44,9 @@ function openForm(tile) {
             try {
                 const tileFields = document.getElementById('tile-specific-fields');
 
-                const response = await fetch(`/addresses`);
+                const response = await fetch(`/addresses`, {
+                    credentials: "include"
+                });
                 const addresses = await response.json();
 
                 lastId = addresses.length;
@@ -68,6 +71,7 @@ function openForm(tile) {
                     deleteButton.addEventListener("click", async () => {
                         // Send a request to the server to delete the address
                         const response = await fetch(`/addresses/delete?address_id=` + address.id, {
+                            credentials: "include",
                             method: "DELETE",
                         });
 
@@ -130,6 +134,7 @@ function openForm(tile) {
             deleteButton.addEventListener("click", async () => {
                 // Send a request to the server to delete the address
                 const response = await fetch(`/addresses/delete?address_id=`, {
+                    credentials: "include",
                     method: "DELETE",
                 });
 
@@ -161,6 +166,7 @@ function openForm(tile) {
             const form = document.querySelector("form");
             const response = await fetch("/addresses/add", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -204,7 +210,9 @@ async function uploadAddressData() {
     const addressInfoTile = document.querySelector(".address-info-tile");
     let addressHTML = "<h2>Addresses</h2>";
 
-    const response = await fetch(`/addresses`);
+    const response = await fetch(`/addresses`, {
+        credentials: "include"
+    });
     const addresses = await response.json();
 
     for (let i = 0; i < addresses.length; i++) {
@@ -225,7 +233,9 @@ async function uploadOrdersData() {
     const orderTile = document.querySelector(".user-orders-list");
     let ordersHTML = "<h2>Orders</h2>";
 
-    const response = await fetch(`/orders`);
+    const response = await fetch(`/orders`, {
+        credentials: "include"
+    });
     const orders = await response.text();
     const ordersObjString = JSON.parse(orders);
 
@@ -241,25 +251,32 @@ async function uploadOrdersData() {
         const restaurantName = restaurantData.name;
 
         ;
+        let state = order.state;
+        state = state.toString();
+        state = state.charAt(0).toUpperCase() + state.substring(1).replace("_", " ").toLowerCase();
 
         ordersHTML += `
         <div class="orders-info-field">
             <p>Restaurant: ${restaurantName}</p>
-            <p>Date of order: ${order.date}</p>
-            <p>State of order: ${order.state}</p>
+            <p>Date of order: ${order.date.toString().replace("T", " ")}</p>
+            <p>State of order: ${state}</p>
             <p>Total: ${order.total}₽</p>
     `;
 
-        if (order.state === "Confirmed") {
+        if (state === "Confirmed") {
             ordersHTML += `
             <button class="order-delivered-btn" onclick="changeStateToDelivered(${order.id})">Order is delivered</button>
             <button class="cancel-order-btn" onclick="confirmCancellation(${order.id})">Cancel order</button>
         `;
-        } else if (order.state === "Delivered") {
+        } else if (state === "Delivered") {
             ordersHTML += `
             <button class="make-review-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
         `;
-        }
+         } // TODO: idk maybe make something like "order again" or pay an order or delete order idk rly
+        // else if (state === "Not Confirmed"){
+        //     ordersHTML += `
+        //     <button class="delete-order-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
+        // }
 
         ordersHTML += `
         </div>
@@ -284,7 +301,7 @@ async function uploadOrdersData() {
 }
 
 async function changeStateToDelivered(orderId) {
-    const response = await fetch(`/orders/changeState/${orderId}/Delivered`, {
+    const response = await fetch(`/orders/changeState/${orderId}/DELIVERED`, {
         credentials: "include"
     });
     if (response.ok) {
@@ -297,7 +314,7 @@ async function changeStateToDelivered(orderId) {
 async function confirmCancellation(orderId) {
     const isConfirmed = confirm("Are you sure you want to cancel this order?");
     if (isConfirmed) {
-        const response = await fetch(`/orders/changeState/${orderId}/Canceled`, {
+        const response = await fetch(`/orders/changeState/${orderId}/CANCELED`, {
             credentials: "include"
         });
         if (response.ok) {

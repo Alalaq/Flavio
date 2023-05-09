@@ -18,6 +18,7 @@ import ru.kpfu.itis.khabibullin.services.DishService;
 import ru.kpfu.itis.khabibullin.services.OrderService;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
 import ru.kpfu.itis.khabibullin.services.UserService;
+import ru.kpfu.itis.khabibullin.utils.converters.DtoToJsonConverter;
 import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
 import java.net.URLDecoder;
@@ -99,12 +100,12 @@ public class CartController {
 
         order.setDishes(dishes);
         try {
-            String jsonCurrentOrderCookie = OrderDto.toJsonStringUsingToString(order);
+            String jsonCurrentOrderCookie = DtoToJsonConverter.toJsonStringUsingToString(order);
             String encodedCurrentOrderCookie = URLEncoder.encode(jsonCurrentOrderCookie, StandardCharsets.UTF_8);
             Cookie currentOrderCookie = new Cookie("currentOrder", encodedCurrentOrderCookie);
             currentOrderCookie.setPath("/");
             response.addCookie(currentOrderCookie);
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
 

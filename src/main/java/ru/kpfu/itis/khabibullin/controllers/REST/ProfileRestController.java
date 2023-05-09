@@ -10,12 +10,11 @@ import ru.kpfu.itis.khabibullin.dto.UserDto;
 import ru.kpfu.itis.khabibullin.services.AddressService;
 import ru.kpfu.itis.khabibullin.services.OrderService;
 import ru.kpfu.itis.khabibullin.services.UserService;
+import ru.kpfu.itis.khabibullin.utils.converters.DtoToJsonConverter;
 import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
 import java.security.Principal;
 import java.util.List;
-
-import static ru.kpfu.itis.khabibullin.dto.OrderDto.toJsonStringUsingToString;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,8 +34,8 @@ public class ProfileRestController {
     public String getOrdersByUserId(Principal principal) {
             List<OrderDto> orders = orderService.getOrdersByUserId(userService.getUserByEmail(principal.getName()).getId());
         try {
-            return toJsonStringUsingToString(orders);
-        } catch (JsonProcessingException e) {
+            return DtoToJsonConverter.toJsonStringUsingToString(orders);
+        } catch (JsonProcessingException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

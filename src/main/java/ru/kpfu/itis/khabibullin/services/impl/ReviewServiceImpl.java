@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.khabibullin.dto.DishDto;
 import ru.kpfu.itis.khabibullin.dto.ReviewDto;
-import ru.kpfu.itis.khabibullin.models.Dish;
-import ru.kpfu.itis.khabibullin.models.Review;
 import ru.kpfu.itis.khabibullin.repositories.ReviewsRepository;
 import ru.kpfu.itis.khabibullin.services.ReviewService;
 

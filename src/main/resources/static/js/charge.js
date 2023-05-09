@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = `email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
 
                 fetch('/process-payment', {
+                    credentials: "include",
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

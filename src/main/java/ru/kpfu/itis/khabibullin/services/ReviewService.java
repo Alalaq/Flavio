@@ -2,8 +2,6 @@ package ru.kpfu.itis.khabibullin.services;
 
 import ru.kpfu.itis.khabibullin.dto.DishDto;
 import ru.kpfu.itis.khabibullin.dto.ReviewDto;
-import ru.kpfu.itis.khabibullin.models.Dish;
-import ru.kpfu.itis.khabibullin.models.Review;
 
 import java.util.List;
 

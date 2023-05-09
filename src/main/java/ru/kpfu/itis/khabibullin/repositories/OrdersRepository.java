@@ -52,4 +52,5 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
         return null;
     }
 
+    List<Order> findAllByUserIdOrderByDateDesc(Long UserId);
 }

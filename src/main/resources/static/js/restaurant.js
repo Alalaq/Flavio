@@ -1,7 +1,9 @@
 const restaurantName = document.getElementById("restaurant-name").textContent;
 
 async function getRestaurant() {
-    const response = await fetch('/restaurant/' + restaurantName);
+    const response = await fetch('/restaurant/' + restaurantName, {
+        credentials: "include"
+    });
     return await response.json();
 }
 

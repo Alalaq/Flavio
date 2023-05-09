@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.khabibullin.dto.OrderDto;
 import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
 import ru.kpfu.itis.khabibullin.dto.UserDto;
+import ru.kpfu.itis.khabibullin.models.Order;
 import ru.kpfu.itis.khabibullin.repositories.OrdersRepository;
 import ru.kpfu.itis.khabibullin.services.OrderService;
 import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
@@ -32,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> getOrdersByUserId(Long id) {
-        return OrderDto.from(ordersRepository.findByUserId(id));
+        List<Order> orders = ordersRepository.findAllByUserIdOrderByDateDesc(id);
+        return OrderDto.from(orders);
     }
 
     @Override

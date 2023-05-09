@@ -63,9 +63,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public void save(RestaurantDto restaurant){
         //TODO: something with image idk
-//        if (restaurant.getImageUrl() == null || restaurant.getImageUrl().equals("")){
-//            restaurant.setImageUrl(ImageUtil.getImages("", 1).get(0));
-//        }
         restaurantsRepository.save(RestaurantDto.to(restaurant));
     }
 }

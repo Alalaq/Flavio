@@ -8,7 +8,7 @@ import java.util.List;
 public interface StripeService {
     String createCustomer(String email, String token);
 
-    public void createProductsAndPrices(List<DishDto> dishes) throws StripeException;
+    void createProductsAndPrices(List<DishDto> dishes) throws StripeException;
 
     String createCharge(String email, String token, int amount);
 }

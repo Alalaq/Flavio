@@ -36,9 +36,9 @@ public class SecurityConfig {
                         .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurant/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error", "/dishes/**", "/cart", "/process-payment", "/create-charge", "/charge", "/orders/**")
                         .and()
                         .authorizeHttpRequests()
-                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants","/addresses/**", "/getCurrentUserId", "/auth/check-authentication", "/verify-email/**", "/error", "/", "/dishes/**", "/orders/**").permitAll()
-                        .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**", "/process-payment", "/payment-success").authenticated()
-                        .requestMatchers("/admin-page").hasAuthority("ADMIN")
+                        .requestMatchers("/homepage", "/login", "/registration", "/restaurants", "/auth/check-authentication", "/verify-email/**", "/error", "/").permitAll()
+                        .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**", "/process-payment", "/payment-success", "/dishes/**", "/orders/**","/addresses/**", "/getCurrentUserId").authenticated()
+                        .requestMatchers("/admin-page", "/api/users/**").hasAuthority("ADMIN")
                         .and().formLogin().loginPage("/login").defaultSuccessUrl("/homepage")
                         .and().logout().logoutUrl("/myLogout")
                         .and().build();

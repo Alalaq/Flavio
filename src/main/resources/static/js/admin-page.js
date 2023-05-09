@@ -67,7 +67,9 @@ function reloadTable() {
     tableBody.innerHTML = "";
 
     // Make an AJAX request to get the list of users
-    fetch("/api/users/")
+    fetch("/api/users/", {
+        credentials: "include"
+    })
         .then(response => response.json())
         .then(users => {
             // Check if there are any users
@@ -95,7 +97,10 @@ function deleteUser(id, row) {
     row.remove();
 
     // Make an AJAX request to delete the user
-    fetch(`/api/users/${id}`, { method: "DELETE" })
+    fetch(`/api/users/${id}`, {
+        credentials: "include",
+        method: "DELETE"
+    })
         .then(() => {
             // Reload the table
             reloadTable();
@@ -106,6 +111,7 @@ function updateUserState(id, state) {
     let newState = state.toUpperCase();
     // Make an AJAX request to update the user's state
     fetch(`/api/users/${id}?updateField=state`, {
+        credentials: "include",
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -130,6 +136,7 @@ function unbanUser(id) {
 function makeUserAdmin(id) {
     // Make an AJAX request to update the user's role to ADMIN
     fetch(`/api/users/${id}?updateField=role`, {
+        credentials: "include",
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

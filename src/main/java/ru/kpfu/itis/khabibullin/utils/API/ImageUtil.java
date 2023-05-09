@@ -36,7 +36,7 @@ public class ImageUtil {
                 throw new IOException("Unexpected code " + response);
             }
 
-            String responseBody = response.body().string();
+            String responseBody = Objects.requireNonNull(response.body()).string();
             Gson gson = new Gson();
             ImageResponse imageResponse = gson.fromJson(responseBody, ImageResponse.class);
 

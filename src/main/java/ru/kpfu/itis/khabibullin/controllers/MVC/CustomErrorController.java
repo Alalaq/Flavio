@@ -15,12 +15,6 @@ public class CustomErrorController implements ErrorController {
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
             //TODO: pages for every status code
-//            if(statusCode == HttpStatus.NOT_FOUND.value()) {
-//                return "error-404";
-//            }
-//            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-//                return "error-500";
-//            }
         }
         return "error";
     }
