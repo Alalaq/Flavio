@@ -7,7 +7,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.khabibullin.services.EmailService;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 public class EmailServiceImpl implements EmailService {
     @Autowired

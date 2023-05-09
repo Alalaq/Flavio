@@ -18,7 +18,9 @@ import ru.kpfu.itis.khabibullin.services.StripeService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 public class StripeServiceImpl implements StripeService {
     @Value("${stripe.api.key}")

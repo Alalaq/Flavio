@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 document.addEventListener('DOMContentLoaded', function () {
     const API_KEY = document.querySelector('#api-key').value;
     // Create a Stripe client.

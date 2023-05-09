@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.repositories.ReviewsRepository;
 import ru.kpfu.itis.khabibullin.services.ReviewService;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

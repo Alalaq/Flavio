@@ -15,7 +15,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
 import java.security.Principal;
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @RestController
 @RequiredArgsConstructor
 public class ProfileRestController {

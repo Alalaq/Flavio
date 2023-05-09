@@ -5,7 +5,9 @@ import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.dto.UserDto;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface UserService {
     UserDto getUserById(Long id);
     UpdatedUserDto getUserForUpdateByEmail(String email);

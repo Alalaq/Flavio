@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const filterButton = document.getElementById("filterButton");
 const filterOptions = document.getElementById("filterOptions");
 

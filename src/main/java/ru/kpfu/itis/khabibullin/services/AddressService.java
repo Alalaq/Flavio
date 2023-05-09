@@ -3,7 +3,9 @@ package ru.kpfu.itis.khabibullin.services;
 import ru.kpfu.itis.khabibullin.dto.AddressDto;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface AddressService {
     List<AddressDto> getAddressByUsersId(Long id);
 

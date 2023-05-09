@@ -11,7 +11,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

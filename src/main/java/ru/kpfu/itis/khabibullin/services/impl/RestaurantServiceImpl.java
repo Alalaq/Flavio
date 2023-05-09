@@ -12,7 +12,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Set;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {

@@ -10,7 +10,9 @@ import ru.kpfu.itis.khabibullin.exceptions.IllegalAddressException;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public class AddressUtil {
     private static final String GEOCODE_API_URL = "https://api.opencagedata.com/geocode/v1/json";
     private static final String API_KEY_ENV_VAR_NAME = "OPENCAGE_API_KEY";

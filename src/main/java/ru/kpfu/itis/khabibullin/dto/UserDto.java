@@ -19,7 +19,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.State;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

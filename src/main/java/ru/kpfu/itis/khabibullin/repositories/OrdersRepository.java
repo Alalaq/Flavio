@@ -13,7 +13,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface OrdersRepository extends JpaRepository<Order, Long> {
     List<Order> findByUserId(Long id);
 

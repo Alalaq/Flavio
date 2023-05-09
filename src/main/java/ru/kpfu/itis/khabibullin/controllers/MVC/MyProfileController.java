@@ -13,7 +13,9 @@ import ru.kpfu.itis.khabibullin.services.UserService;
 
 import java.security.Principal;
 import java.util.ArrayList;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Controller
 @RequestMapping({"/myProfile", "/profile"})
 @RequiredArgsConstructor

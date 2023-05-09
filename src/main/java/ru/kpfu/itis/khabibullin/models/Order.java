@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Entity
 @Data
 @AllArgsConstructor

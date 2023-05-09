@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const form = document.querySelector('#signup-form');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#password');

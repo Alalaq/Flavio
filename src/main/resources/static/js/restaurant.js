@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const restaurantName = document.getElementById("restaurant-name").textContent;
 
 async function getRestaurant() {

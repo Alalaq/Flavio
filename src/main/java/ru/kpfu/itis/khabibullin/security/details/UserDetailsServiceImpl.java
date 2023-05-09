@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.khabibullin.models.User;
 import ru.kpfu.itis.khabibullin.repositories.UsersRepository;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kpfu.itis.khabibullin.dto.RestaurantDto;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @RestController
 public class RestaurantRestController {
     @Autowired

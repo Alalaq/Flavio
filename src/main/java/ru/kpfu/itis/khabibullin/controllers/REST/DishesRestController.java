@@ -8,7 +8,9 @@ import ru.kpfu.itis.khabibullin.dto.DishDto;
 import ru.kpfu.itis.khabibullin.services.DishService;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @RestController
 public class DishesRestController {
     @Autowired

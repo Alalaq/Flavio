@@ -1,5 +1,7 @@
 package ru.kpfu.itis.khabibullin.utils.enums;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public enum StateOfOrder {
     NOT_CONFIRMED("Not confirmed"),
     CONFIRMED("Confirmed"),

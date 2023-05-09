@@ -3,7 +3,9 @@ package ru.kpfu.itis.khabibullin.services;
 import ru.kpfu.itis.khabibullin.dto.DishDto;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface DishService {
     DishDto getDishById(Long id);
     List<DishDto> getAllDishes();

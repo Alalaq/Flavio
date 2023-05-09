@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.util.Collection;
 import java.util.Collections;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 

@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Controller
 @RequiredArgsConstructor
 public class PaymentController {

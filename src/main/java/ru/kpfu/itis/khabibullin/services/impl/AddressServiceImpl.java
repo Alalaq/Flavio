@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.repositories.AddressRepository;
 import ru.kpfu.itis.khabibullin.services.AddressService;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

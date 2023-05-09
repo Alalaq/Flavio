@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const reviews = document.querySelectorAll('.review');
 reviews.forEach(review => {
     review.addEventListener('mousemove', e => {

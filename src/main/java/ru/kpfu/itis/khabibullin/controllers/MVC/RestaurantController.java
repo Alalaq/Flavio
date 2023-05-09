@@ -13,7 +13,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.Price;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Controller
 @RequestMapping("/restaurants")
 public class RestaurantController {

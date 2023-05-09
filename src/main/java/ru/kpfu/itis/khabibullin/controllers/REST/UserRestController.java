@@ -11,7 +11,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor

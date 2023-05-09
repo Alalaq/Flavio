@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findRestaurantById(Long id);
 

@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.services.DishService;
 import ru.kpfu.itis.khabibullin.utils.API.ImageUtil;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

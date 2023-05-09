@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.services.UserService;
 import ru.kpfu.itis.khabibullin.utils.enums.State;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Controller
 public class EmailVerificationController {
     @Autowired

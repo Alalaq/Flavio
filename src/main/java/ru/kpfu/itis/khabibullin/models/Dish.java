@@ -10,7 +10,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Entity
 @Data
 @AllArgsConstructor

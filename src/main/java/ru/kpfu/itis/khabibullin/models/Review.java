@@ -12,7 +12,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Entity
 @Data
 @AllArgsConstructor

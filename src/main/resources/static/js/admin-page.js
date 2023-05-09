@@ -1,4 +1,4 @@
-// Get the table body element
+// @author Khabibullin Alisher
 const tableBody = document.getElementById("user-table-body");
 const table = document.getElementById("user-table");
 const noUsersMsg = document.getElementById("no-users");

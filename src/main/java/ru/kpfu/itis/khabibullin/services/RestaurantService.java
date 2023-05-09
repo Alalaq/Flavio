@@ -6,7 +6,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
 import java.util.List;
 import java.util.Set;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface RestaurantService {
     List<RestaurantDto> getAllRestaurants();
 

@@ -16,7 +16,9 @@ import ru.kpfu.itis.khabibullin.services.EmailService;
 import ru.kpfu.itis.khabibullin.services.UserService;
 
 import java.util.UUID;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Controller
 public class RegistrationController {
 

@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.kpfu.itis.khabibullin.models.Dish;
 
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public interface DishesRepository extends JpaRepository<Dish, Long> {
     Dish findByName(String name);
     Dish findDishById(Long id);

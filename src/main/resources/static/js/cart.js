@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 window.onload = function() {
     updateCartTotal();
 }

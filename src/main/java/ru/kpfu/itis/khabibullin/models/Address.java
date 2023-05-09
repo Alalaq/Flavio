@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Entity
 @Data
 @AllArgsConstructor

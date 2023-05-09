@@ -21,7 +21,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.State;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

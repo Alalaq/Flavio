@@ -9,7 +9,9 @@ import ru.kpfu.itis.khabibullin.models.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * @author Khabibullin Alisher
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

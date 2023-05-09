@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const params = new URLSearchParams(window.location.search);
 const amount = params.get('amount');
 if (amount) {

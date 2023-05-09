@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * @author Khabibullin Alisher
+ */
 public class ImageUtil {
     private static final String UNSPLASH_API_URL = "https://api.unsplash.com/search/photos";
     private static final String API_KEY_ENV_VAR_NAME = "UNPLASH_API_KEY";

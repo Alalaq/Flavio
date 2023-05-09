@@ -1,3 +1,4 @@
+// @author Khabibullin Alisher
 const categories = document.querySelectorAll(".categories ul li a");
 const contents = document.querySelectorAll(".content .profile-info");
 

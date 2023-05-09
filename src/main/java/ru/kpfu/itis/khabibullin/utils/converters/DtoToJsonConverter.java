@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * @author Khabibullin Alisher
+ */
+
 public class DtoToJsonConverter {
     public static <T> String toJsonString(T obj) throws IllegalAccessException {
         StringBuilder sb = new StringBuilder();
