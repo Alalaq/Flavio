@@ -12,8 +12,12 @@ import java.util.List;
 public interface ReviewsRepository extends JpaRepository<Review, Long> {
     List<Review> findByDish(Dish dish);
 
-    @Query(value = "SELECT * FROM flavio_db.public.reviews r" +
+    @Query(value = "SELECT * FROM reviews r" +
             " WHERE r.order_id = :orderId limit 1", nativeQuery = true)
     Review findFirstByOrderId(Long orderId);
+
+    @Query(value = "SELECT * FROM reviews r" +
+            " WHERE r.restaurant_id = :restaurantId", nativeQuery = true)
+    List<Review> findAllByRestaurantId(Long restaurantId);
 
 }

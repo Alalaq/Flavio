@@ -54,6 +54,11 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto getReviewByOrderId(Long orderId) {
         return ReviewDto.from(reviewsRepository.findFirstByOrderId(orderId));
     }
+
+    @Override
+    public List<ReviewDto> getReviewByRestaurantId(Long restaurantId) {
+        return ReviewDto.from(reviewsRepository.findAllByRestaurantId(restaurantId));
+    }
 }
 
 

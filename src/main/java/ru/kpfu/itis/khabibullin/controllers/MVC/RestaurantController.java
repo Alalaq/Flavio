@@ -67,11 +67,14 @@ public class RestaurantController {
 
             String deliveryTime = lowerBound + "-" + upperBound;
 
+            System.out.println(deliveryTime);
+
             model.addAttribute("restaurant-delivery-time", deliveryTime);
         } else {
             model.addAttribute("restaurant-delivery-time", -1);
         }
         model.addAttribute("restaurant-name", restaurantName);
+        model.addAttribute("restaurantId", restaurantService.getRestaurantByName(restaurantName).getId());
         return "restaurant";
     }
 

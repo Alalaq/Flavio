@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/static/images/mini-logo%20(1).svg">
-    <title id="restaurant-name" th:id="restaurant-name" th:text="${restaurantName}"></title>
+    <title id="restaurant-name" th:id="restaurant-name" th:text="${restaurantName}"></title>>
     <link href="/static/styles.css" rel="stylesheet">
     <script defer src="../static/js/main.js"></script>
     <script defer src="../static/js/restaurant.js"></script>
@@ -35,6 +35,7 @@
             <div class="restaurant-details-container">
                 <div class="image-gradient"></div>
                 <div id="restaurant-name-h2"></div>
+                <div id="restaurantId" th:id="restaurantId" th:name="restaurantId" th:text="${restaurantId}"/>
                 <div class="restaurant-rating-button" id="restaurant-rating"></div>
                 <div id="restaurant-delivery-time" th:id="restaurant-delivery-time" th:text="${deliveryTime}" style="display: none"></div>
                 <div class="restaurant-distance-button" id="restaurant-distance-button-time"></div>
@@ -42,7 +43,7 @@
                 <form id="restaurant-form" style="display:none;">
                     <p id="restaurant-description"></p>
                     <p><strong>Cuisine: </strong><span id="restaurant-cuisine"></span></p>
-                    <p><strong>Price Range: </strong><span id="restaurant-price"></span></p>
+                    <p><strong>Prices: </strong><span id="restaurant-price"></span></p>
                     <p><strong>Address: </strong><span id="restaurant-address"></span></p>
                 </form>
             </div>

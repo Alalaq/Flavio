@@ -17,5 +17,7 @@ public interface ReviewService {
     void saveAll(List<ReviewDto> reviews);
 
     ReviewDto getReviewByOrderId(Long orderId);
+
+    List<ReviewDto> getReviewByRestaurantId(Long restaurantId);
 }
 

@@ -22,7 +22,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<RestaurantDto> getAllRestaurants() {
-        return RestaurantDto.from(restaurantsRepository.findAll());
+        return RestaurantDto.from(restaurantsRepository.findAllOrderById());
     }
 
     @Override

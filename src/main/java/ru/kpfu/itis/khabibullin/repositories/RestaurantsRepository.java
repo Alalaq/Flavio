@@ -1,6 +1,7 @@
 package ru.kpfu.itis.khabibullin.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
 import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
@@ -18,8 +19,11 @@ public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
 
     Optional<Restaurant> findRestaurantByName(String name);
 
+    @Query(value = "SELECT * FROM restaurants ORDER BY restaurant_id", nativeQuery = true)
+    List<Restaurant> findAllOrderById();
+
     default List<Restaurant> findByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating) {
-        List<Restaurant> restaurants = findAll();
+        List<Restaurant> restaurants = findAllOrderById();
         if (cuisines.isEmpty() && price.isEmpty() && distance == null && address == null && rating == null) {
             return restaurants;
         } else {

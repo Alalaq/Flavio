@@ -87,4 +87,11 @@ public class ReviewController {
 
         return "redirect:/restaurants";
     }
+
+    @GetMapping("/reviews/{restaurantId}")
+    public String getReviews(@PathVariable Long restaurantId, Model model){
+        List<ReviewDto> reviews = reviewService.getReviewByRestaurantId(restaurantId);
+        model.addAttribute("reviews", reviews);
+        return "reviews";
+    }
 }

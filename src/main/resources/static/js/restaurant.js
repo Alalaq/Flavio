@@ -242,5 +242,12 @@ function goToCart(cartData) {
     xhr.send(JSON.stringify(cartData));
 }
 
+const reviewsButton = document.getElementById('restaurant-rating');
+const restId = document.getElementById('restaurantId').textContent;
+reviewsButton.addEventListener('click', () => {
+    toReviews(restId);
+})
 
-
+function toReviews(id){
+    window.location.href = "/reviews/" + id;
+}
