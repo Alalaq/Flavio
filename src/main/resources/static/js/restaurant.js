@@ -23,7 +23,12 @@ async function main() {
     document.getElementById("restaurant-cuisine").textContent = cuisines;
     document.getElementById("restaurant-price").textContent = restaurant.price;
     document.getElementById("restaurant-rating").textContent = '★ ' + restaurant.generalRating;
-    document.getElementById("restaurant-distance-button-time").innerHTML = '🕒' + document.getElementById("restaurant-delivery-time").textContent;
+    const restaurantDistanceButtonTime = document.getElementById("restaurant-distance-button-time");
+    const restaurantDeliveryTime = document.getElementById("restaurant-delivery-time");
+
+    const timeNode = document.createTextNode('🕒' + restaurantDeliveryTime.textContent);
+    restaurantDistanceButtonTime.textContent = '';
+    restaurantDistanceButtonTime.appendChild(timeNode);
     document.getElementById("restaurant-address").textContent = restaurant.address;
 
     const cuisinesMenu = document.getElementById('cuisines-menu');
@@ -65,18 +70,41 @@ async function main() {
                         dishesList.classList.add('dishes-card-list')
                         dishesByCuisine[cuisine].forEach(function (dish) {
                             const dishItem = document.createElement('li');
-                            dishItem.classList.add('dishes-card-list-item')
-                            dishItem.innerHTML = `
-                            <div class="dishes-card">
-                            <h3>${dish.name}</h3>
-                            <img class="dish-image" src="${dish.imageUrl}" alt="${dish.name}">
-                            <p style="font-size: 25px;">${dish.price} ₽</p>
-                            <p style="font-size: 13px">${dish.description}</p>
-                            <button class="add-to-cart-button">Add to card</button>
-                            </div>
-                        `;
+                            dishItem.classList.add('dishes-card-list-item');
+
+                            const dishCard = document.createElement('div');
+                            dishCard.classList.add('dishes-card');
+
+                            const dishName = document.createElement('h3');
+                            dishName.textContent = dish.name;
+
+                            const dishImage = document.createElement('img');
+                            dishImage.classList.add('dish-image');
+                            dishImage.src = dish.imageUrl;
+                            dishImage.alt = dish.name;
+
+                            const dishPrice = document.createElement('p');
+                            dishPrice.style.fontSize = '25px';
+                            dishPrice.textContent = `${dish.price} ₽`;
+
+                            const dishDescription = document.createElement('p');
+                            dishDescription.style.fontSize = '13px';
+                            dishDescription.textContent = dish.description;
+
+                            const addToCartButton = document.createElement('button');
+                            addToCartButton.classList.add('add-to-cart-button');
+                            addToCartButton.textContent = 'Add to cart';
+
+                            dishCard.appendChild(dishName);
+                            dishCard.appendChild(dishImage);
+                            dishCard.appendChild(dishPrice);
+                            dishCard.appendChild(dishDescription);
+                            dishCard.appendChild(addToCartButton);
+
+                            dishItem.appendChild(dishCard);
                             dishesList.appendChild(dishItem);
                         });
+
                         cuisineContainer.appendChild(dishesList);
                         dishesContainer.appendChild(cuisineContainer);
                         const cuisineLink = document.createElement('li');
@@ -173,16 +201,34 @@ dishesContainer.addEventListener('click', event => {
             const quantityElement = existingCartItem.querySelector('.quantity');
             quantityElement.textContent = parseInt(quantityElement.textContent) + 1;
         } else {
-            // If the item does not exist, add a new row to the cart
             const cartItem = document.createElement('li');
             cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-        <div class="cart-p">${dishName}</div>
-        <div class="cart-p price">${dishPrice}</div>
-        <button class="decrease-cart-item-button">-</button>
-        <div class="cart-p quantity">1</div>
-        <button class="increase-cart-item-button">+</button>
-      `;
+
+            const dishNameDiv = document.createElement('div');
+            dishNameDiv.classList.add('cart-p');
+            dishNameDiv.textContent = dishName;
+
+            const dishPriceDiv = document.createElement('div');
+            dishPriceDiv.classList.add('cart-p', 'price');
+            dishPriceDiv.textContent = dishPrice;
+
+            const decreaseButton = document.createElement('button');
+            decreaseButton.classList.add('decrease-cart-item-button');
+            decreaseButton.textContent = '-';
+
+            const quantityDiv = document.createElement('div');
+            quantityDiv.classList.add('cart-p', 'quantity');
+            quantityDiv.textContent = '1';
+
+            const increaseButton = document.createElement('button');
+            increaseButton.classList.add('increase-cart-item-button');
+            increaseButton.textContent = '+';
+
+            cartItem.appendChild(dishNameDiv);
+            cartItem.appendChild(dishPriceDiv);
+            cartItem.appendChild(decreaseButton);
+            cartItem.appendChild(quantityDiv);
+            cartItem.appendChild(increaseButton);
             cartItems.appendChild(cartItem);
             cart.appendChild(totalPrice)
             cart.appendChild(paymentButton)

@@ -12,8 +12,6 @@ filterButton.addEventListener("click", () => {
 
 
 function redirectToFiltered() {
-    console.log("redirectToFiltered() function called");
-
     let price = document.getElementById("price").value;
     let distance = document.getElementById("distance").value;
     let cuisine = document.getElementById("cuisine").value;
@@ -24,11 +22,16 @@ function redirectToFiltered() {
 
     return false;
 }
+let addressDropdown = document.getElementById('address-dropdown');
+
 document.addEventListener('DOMContentLoaded', function() {
     checkAuthenticationStatus(function(authenticated) {
         if (authenticated) {
+            displaySavedAddresses();
+
             addressDropdown.addEventListener('change', function() {
                 const selectedValue = this.value;
+                console.log(selectedValue)
                 const xhr = new XMLHttpRequest();
                 const url = '/restaurants?userAddress=' + (selectedValue);
                 xhr.open('POST', url, true);
@@ -41,12 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 xhr.send();
             });
 
-            displaySavedAddresses();
         }
     });
 });
 
-let addressDropdown = document.querySelector('#address-dropdown');
 
 function checkAuthenticationStatus(callback) {
     let xhr = new XMLHttpRequest();
@@ -61,30 +62,36 @@ function checkAuthenticationStatus(callback) {
 
     xhr.send();
 }
+
 function displaySavedAddresses() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', '/addresses', true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             let addresses = JSON.parse(xhr.responseText);
-            let html = '';
-            html += `
-                        <option value="Select an option" disabled selected>Select an option</option>
-                    `;
+            addressDropdown.setAttribute('id', 'address-dropdown')
+            addressDropdown.setAttribute('name', 'address-dropdown')
+            addressDropdown.setAttribute('class', 'address-dropdown')
+            let defaultOption = document.createElement('option');
+            defaultOption.setAttribute('value', 'Select an option');
+            defaultOption.setAttribute('disabled', '');
+            defaultOption.textContent = 'Select an option';
+            addressDropdown.appendChild(defaultOption);
             if (addresses.length > 0) {
                 for (let i = 0; i < addresses.length; i++) {
                     const address = addresses[i];
-                      html += `
-                        <option value="${address.streetName}, ${address.homeNumber}, ${address.city},">
-                            ${address.city}, ${address.streetName}, ${address.homeNumber}
-                        </option>
-                    `;
-
+                    let option = document.createElement('option');
+                    option.setAttribute('value', `${address.streetName}, ${address.homeNumber}, ${address.city}`);
+                    option.textContent = `${address.city}, ${address.streetName}, ${address.homeNumber}`;
+                    addressDropdown.appendChild(option);
                 }
             } else {
-                html += '<option value="" disabled>No saved addresses found</option>';
+                let noOption = document.createElement('option');
+                noOption.setAttribute('value', '');
+                noOption.setAttribute('disabled', '');
+                noOption.textContent = 'No saved addresses found';
+                addressDropdown.appendChild(noOption);
             }
-            addressDropdown.innerHTML = html;
         } else {
             console.error('Error fetching saved addresses: ' + xhr.status);
         }

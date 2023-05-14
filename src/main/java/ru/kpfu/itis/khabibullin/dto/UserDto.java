@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,19 +30,33 @@ import java.util.stream.Collectors;
 @Builder
 public class UserDto {
     private Long id;
+
+    @NotNull
     private String username;
+
+    @Email
+    @NotNull
     private String email;
+
+    @NotNull
     private String phoneNumber;
+
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate birthday;
+
     @JsonManagedReference
     @JsonIgnore
     private List<Address> addresses;
+
     @JsonManagedReference
     @JsonIgnore
     private List<Order> orders;
+
+    @NotNull
     private Role role;
+
+    @NotNull
     private State state;
 
     public static User to(UserDto dto) {

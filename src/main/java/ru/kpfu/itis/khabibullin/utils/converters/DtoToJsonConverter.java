@@ -1,3 +1,12 @@
+/*
+ * *
+ *  Copyright (c) 2023.
+ *  * @author Khabibullin Alisher (Alalaq)
+ *  *
+ *  * All rights are reserved by ITIS institute.
+ *
+ */
+
 package ru.kpfu.itis.khabibullin.utils.converters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

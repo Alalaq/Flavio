@@ -17,28 +17,57 @@ for (let i = 0; i < categories.length; i++) {
 }
 
 function openForm(tile) {
-    var form = document.getElementById("popupForm");
+    let form = document.getElementById("popupForm");
     form.style.display = "block";
     document.body.classList.add("dark-mode");
     document.body.style.overflow = "hidden"; // Prevent scrolling while the form is open
 
     // Remove any previously added tile-specific fields
-    var tileFields = document.getElementById("tile-specific-fields");
-    tileFields.innerHTML = "";
+    let tileFields = document.getElementById("tile-specific-fields");
+    while (tileFields.firstChild) {
+        tileFields.removeChild(tileFields.firstChild);
+    }
 
-    // Add tile-specific fields to the form based on the specified tile
+// Add tile-specific fields to the form based on the specified tile
     if (tile === "basic-info") {
-        //TODO: if email is updated, send verification to email
-        tileFields.innerHTML = `
-            <label for="avatar"><b>Avatar</b></label>
-            <input type="file" name="avatar" id="avatar">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" id="username">
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" id="email">
-            <label for="birthday"><b>Birthday</b></label>
-            <input type="date" name="birthday" id="birthday">
-        `;
+        let label1 = document.createElement("label");
+        label1.textContent = "Avatar";
+        let input1 = document.createElement("input");
+        input1.setAttribute("type", "file");
+        input1.setAttribute("name", "avatar");
+        input1.setAttribute("id", "avatar");
+        label1.appendChild(input1);
+
+        let label2 = document.createElement("label");
+        label2.textContent = "Username";
+        let input2 = document.createElement("input");
+        input2.setAttribute("type", "text");
+        input2.setAttribute("placeholder", "Enter Username");
+        input2.setAttribute("name", "username");
+        input2.setAttribute("id", "username");
+        label2.appendChild(input2);
+
+        let label3 = document.createElement("label");
+        label3.textContent = "Email";
+        let input3 = document.createElement("input");
+        input3.setAttribute("type", "email");
+        input3.setAttribute("placeholder", "Enter Email");
+        input3.setAttribute("name", "email");
+        input3.setAttribute("id", "email");
+        label3.appendChild(input3);
+
+        let label4 = document.createElement("label");
+        label4.textContent = "Birthday";
+        let input4 = document.createElement("input");
+        input4.setAttribute("type", "date");
+        input4.setAttribute("name", "birthday");
+        input4.setAttribute("id", "birthday");
+        label4.appendChild(input4);
+
+        tileFields.appendChild(label1);
+        tileFields.appendChild(label2);
+        tileFields.appendChild(label3);
+        tileFields.appendChild(label4);
     } else if (tile === "address-info") {
         let lastId;
         (async function () {
@@ -93,7 +122,7 @@ function openForm(tile) {
 
         let newAddress;
         const addAddressButton = document.createElement("button");
-        addAddressButton.innerHTML = "Add Address";
+        addAddressButton.textContent = "Add Address";
         addAddressButton.className = "add-address-button";
         addAddressButton.addEventListener("click", function (event) {
             event.preventDefault();
@@ -156,7 +185,7 @@ function openForm(tile) {
             addAddressButton.disabled = true;
             saveButton.disabled = false;
 
-            // Store the new address in a variable
+            // Store the new address in a letiable
             newAddress = address;
         });
 
@@ -186,17 +215,39 @@ function openForm(tile) {
         const tileFields = document.getElementById("tile-specific-fields");
         tileFields.appendChild(addAddressButton);
     } else if (tile === "contact-info") {
-        tileFields.innerHTML = `
-            <label for="phoneNumber"><b>Phone</b></label>
-            <input type="text" placeholder="Enter Phone Number" name="phoneNumber" id="phoneNumber">
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" id="email">
-        `;
+        const labelPhoneNumber = document.createElement("label");
+        labelPhoneNumber.innerText = "Phone";
+        const inputPhoneNumber = document.createElement("input");
+        inputPhoneNumber.type = "text";
+        inputPhoneNumber.placeholder = "Enter Phone Number";
+        inputPhoneNumber.name = "phoneNumber";
+        inputPhoneNumber.id = "phoneNumber";
+
+        const labelEmail = document.createElement("label");
+        labelEmail.innerText = "Email";
+        const inputEmail = document.createElement("input");
+        inputEmail.type = "email";
+        inputEmail.placeholder = "Enter Email";
+        inputEmail.name = "email";
+        inputEmail.id = "email";
+
+        tileFields.appendChild(labelPhoneNumber);
+        tileFields.appendChild(inputPhoneNumber);
+        tileFields.appendChild(labelEmail);
+        tileFields.appendChild(inputEmail);
     } else if (tile === "security-info") {
-        tileFields.innerHTML = `
-            <label for="hashPassword"><b>Enter new password</b></label> 
-                    <input type="password" placeholder="Enter new password" name="hashPassword" id="hashPassword">`
+        const labelPassword = document.createElement("label");
+        labelPassword.innerText = "Enter new password";
+        const inputPassword = document.createElement("input");
+        inputPassword.type = "password";
+        inputPassword.placeholder = "Enter new password";
+        inputPassword.name = "hashPassword";
+        inputPassword.id = "hashPassword";
+
+        tileFields.appendChild(labelPassword);
+        tileFields.appendChild(inputPassword);
     }
+
 }
 
 function closeForm() {
@@ -209,7 +260,10 @@ document.addEventListener('DOMContentLoaded', uploadAddressData);
 
 async function uploadAddressData() {
     const addressInfoTile = document.querySelector(".address-info-tile");
-    let addressHTML = "<h2>Addresses</h2>";
+    const addressContainer = document.createElement("div");
+    const heading = document.createElement("h2");
+    heading.textContent = "Addresses";
+    addressContainer.appendChild(heading);
 
     const response = await fetch(`/addresses`, {
         credentials: "include"
@@ -218,91 +272,134 @@ async function uploadAddressData() {
 
     for (let i = 0; i < addresses.length; i++) {
         const address = addresses[i];
-        addressHTML += `
-    <div class="address-field">
-      <p> ${address.city}, ${address.streetName}, ${address.homeNumber}</p>
-    </div>
-  `;
+        const addressField = document.createElement("div");
+        const addressText = document.createElement("p");
+        addressText.textContent = `${address.city}, ${address.streetName}, ${address.homeNumber}`;
+        addressField.appendChild(addressText);
+        addressContainer.appendChild(addressField);
     }
-    addressHTML += ' <button class="openButton" onclick="openForm(\'address-info\')"><strong>Change Information</strong></button>';
-    addressInfoTile.innerHTML = addressHTML;
+
+    const changeInfoButton = document.createElement("button");
+    changeInfoButton.classList.add("openButton");
+    changeInfoButton.textContent = "Change Information";
+    changeInfoButton.addEventListener("click", () => {
+        openForm("address-info");
+    });
+    addressContainer.appendChild(changeInfoButton);
+
+    while (addressInfoTile.firstChild) {
+        addressInfoTile.removeChild(addressInfoTile.firstChild);
+    }
+    addressInfoTile.appendChild(addressContainer);
 }
 
 document.addEventListener('DOMContentLoaded', uploadOrdersData);
 
 async function uploadOrdersData() {
     const orderTile = document.querySelector(".user-orders-list");
-    let ordersHTML = "<h2>Orders</h2>";
+    while (orderTile.firstChild) {
+        orderTile.removeChild(orderTile.firstChild);
+    }
+    const h2 = document.createElement("h2");
+    h2.textContent = "Orders";
+    orderTile.appendChild(h2);
 
     const response = await fetch(`/orders`, {
         credentials: "include"
     });
+
     const orders = await response.text();
     const ordersObjString = JSON.parse(orders);
-
     const ordersObj = JSON.parse(ordersObjString);
 
-
     for (const order of ordersObj) {
-        // Make an API call to get the restaurant name, including cookies in the request
         const restaurantResponse = await fetch(`/restaurant/get/${order.restaurantId}`, {
             credentials: "include"
         });
         const restaurantData = await restaurantResponse.json();
         const restaurantName = restaurantData.name;
 
-
         let state = order.state;
         state = state.toString();
         state = state.charAt(0).toUpperCase() + state.substring(1).replace("_", " ").toLowerCase();
 
-        ordersHTML += `
-        <div class="orders-info-field">
-            <p>Restaurant: ${restaurantName}</p>
-            <p>Date of order: ${order.date.toString().replace("T", " ")}</p>
-            <p>State of order: ${state}</p>
-            <p>Total: ${order.total}₽</p>
-    `;
+        const orderInfoField = document.createElement("div");
+        orderInfoField.className = "orders-info-field";
+
+        const restaurantP = document.createElement("p");
+        restaurantP.textContent = `Restaurant: ${restaurantName}`;
+        orderInfoField.appendChild(restaurantP);
+
+        const dateP = document.createElement("p");
+        dateP.textContent = `Date of order: ${order.date.toString().replace("T", " ")}`;
+        orderInfoField.appendChild(dateP);
+
+        const stateP = document.createElement("p");
+        stateP.textContent = `State of order: ${state}`;
+        orderInfoField.appendChild(stateP);
+
+        const totalP = document.createElement("p");
+        totalP.textContent = `Total: ${order.total}₽`;
+        orderInfoField.appendChild(totalP);
 
         if (state === "Confirmed") {
-            ordersHTML += `
-            <button class="order-delivered-btn" onclick="changeStateToDelivered(${order.id})">Order is delivered</button>
-            <button class="cancel-order-btn" onclick="confirmCancellation(${order.id})">Cancel order</button>
-        `;
-        } else if (state === "Delivered") {
-            ordersHTML += `
-            <button class="make-review-btn" onclick="displayReviewForm(${order.id}, ${order.userId})">Make a review</button>
-        `;
-         } else if (state === "Reviewed") {
-            ordersHTML += `
-            <p>Thanks for your contribution!</p>
-        `;
+            const deliveredButton = document.createElement("button");
+            deliveredButton.className = "order-delivered-btn";
+            deliveredButton.textContent = "Order is delivered";
+            deliveredButton.onclick = function() {
+                changeStateToDelivered(order.id);
+            };
+            orderInfoField.appendChild(deliveredButton);
+
+            const cancelButton = document.createElement("button");
+            cancelButton.className = "cancel-order-btn";
+            cancelButton.textContent = "Cancel order";
+            cancelButton.onclick = function() {
+                confirmCancellation(order.id);
+            };
+            orderInfoField.appendChild(cancelButton);
+        }  else if (state === "Delivered") {
+            const makeReviewButton = document.createElement("button");
+            makeReviewButton.className = "make-review-btn";
+            makeReviewButton.textContent = "Make a review";
+            makeReviewButton.onclick = function() {
+                displayReviewForm(order.id, order.userId);
+            };
+            orderInfoField.appendChild(makeReviewButton);
+        } else if (state === "Reviewed") {
+            const reviewP = document.createElement("p");
+            reviewP.textContent = "Thanks for your contribution!";
+            orderInfoField.appendChild(reviewP);
         } // TODO: idk maybe make something like "order again" or pay an order or delete order idk rly
-        // else if (state === "Not Confirmed"){
-        //     ordersHTML += `
-        //     <button class="delete-order-btn" onclick="displayReviewForm(${order.id})">Make a review</button>
-        // }
+        orderTile.appendChild(orderInfoField);
 
-        ordersHTML += `
-        </div>
-        <h3>Dishes:</h3>
-        <div class="orders-info-field-dishes">
-    `;
+        const dishesH3 = document.createElement("h3");
+        dishesH3.textContent = "Dishes:";
+        orderTile.appendChild(dishesH3);
+
+        const dishesInfoField = document.createElement("div");
+        dishesInfoField.className = "orders-info-field-dishes";
+
         for (const dish of order.dishes) {
-            ordersHTML += `
-        <div class="orders-dish">
-          <p>${dish.name} - ${dish.price}₽</p>
-          <img class="orders-dish-image" src="${dish.imageUrl}" alt="Dish Image">
-        </div>
-      `;
-        }
-        ordersHTML += `
-      </div>
-      <br>
-    `;
-    }
+            const dishDiv = document.createElement("div");
+            dishDiv.className = "orders-dish";
 
-    orderTile.innerHTML = ordersHTML;
+            const dishNameP = document.createElement("p");
+            dishNameP.textContent = `${dish.name} - ${dish.price}₽`;
+            dishDiv.appendChild(dishNameP);
+
+            const dishImg = document.createElement("img");
+            dishImg.className = "orders-dish-image";
+            dishImg.src = dish.imageUrl;
+            dishImg.alt = "Dish Image";
+            dishDiv.appendChild(dishImg);
+
+            dishesInfoField.appendChild(dishDiv);
+        }
+
+        orderTile.appendChild(dishesInfoField);
+        orderTile.appendChild(document.createElement("br"));
+    }
 }
 
 async function changeStateToDelivered(orderId) {

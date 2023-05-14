@@ -2,8 +2,6 @@ package ru.kpfu.itis.khabibullin.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,8 +38,6 @@ public class Review {
 
     private String comment;
 
-    @Min(1)
-    @Max(5)
     private int rating;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -63,8 +63,10 @@ function createUserRow(user) {
 
 // Function to reload the table
 function reloadTable() {
-    // Clear the table
-    tableBody.innerHTML = "";
+    // Remove all existing rows from the table
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
 
     // Make an AJAX request to get the list of users
     fetch("/api/users/", {
@@ -81,7 +83,7 @@ function reloadTable() {
                 // If there are users, show the table and hide the "no users" message
                 table.style.display = "table";
                 noUsersMsg.style.display = "none";
-                // Iterate over the list of users and create HTML elements for each user
+                // Iterate over the list of users and create table rows for each user
                 users.forEach(user => {
                     const row = createUserRow(user);
                     tableBody.appendChild(row);
@@ -89,6 +91,7 @@ function reloadTable() {
             }
         });
 }
+
 
 
 // Function to delete a user

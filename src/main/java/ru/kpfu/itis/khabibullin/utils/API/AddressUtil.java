@@ -1,3 +1,12 @@
+/*
+ * *
+ *  Copyright (c) 2023.
+ *  * @author Khabibullin Alisher (Alalaq)
+ *  *
+ *  * All rights are reserved by ITIS institute.
+ *
+ */
+
 package ru.kpfu.itis.khabibullin.utils.API;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,7 +37,7 @@ public class AddressUtil {
             .build();
 
     public static void main(String[] args) {
-        System.out.println(AddressUtil.calculateDistance("Tverskaya st. 1, Moscow", "Academician Glushko street, 15, Kazan"));
+        System.out.println(AddressUtil.getCoordinates("Gabdulla Tukaya Street, 5 , Kazan")+ ", " + AddressUtil.getCoordinates("15 Akademika Glushko Street, Kazan"));
     }
 
     /**
@@ -67,6 +76,8 @@ public class AddressUtil {
         if (coordinatesCache.asMap().containsKey(address)) {
             return coordinatesCache.getIfPresent(address);
         }
+
+        // T0D0: translate addresses so location would be more accurate
 
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse(GEOCODE_API_URL))
                 .newBuilder()

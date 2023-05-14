@@ -46,9 +46,11 @@ public class RestaurantController {
                                             @RequestParam(value = "price", required = false) List<String> prices,
                                             @RequestParam(value = "distance", required = false) Integer distance,
                                             Model model) {
-        Set<Cuisine> cuisineSet = cuisines != null ? cuisines.stream().map(Cuisine::valueOf).collect(Collectors.toSet()) : null;
-        Set<Price> priceSet = prices != null ? prices.stream().map(Price::valueOf).collect(Collectors.toSet()) : null;
-        List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisineSet, priceSet, distance, userAddress, rating);
+        Set<Cuisine> cuisineSet = (cuisines != null && !cuisines.isEmpty()) ? cuisines.stream().map(Cuisine::valueOf).collect(Collectors.toSet()) : Set.of(Cuisine.values());
+        Set<Price> priceSet = (prices != null && !prices.isEmpty()) ? prices.stream().map(Price::valueOf).collect(Collectors.toSet()) : Set.of(Price.values());
+        Double finalRating = rating != null ? rating : 1;
+        Integer finalDistance = distance != null ? distance : 12756;
+        List<RestaurantDto> restaurants = restaurantService.getAllRestaurantsByFilters(cuisineSet, priceSet, finalDistance, userAddress, finalRating);
         model.addAttribute("restaurants", restaurants);
         return "restaurants";
     }

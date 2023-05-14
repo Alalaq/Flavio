@@ -1,5 +1,7 @@
 package ru.kpfu.itis.khabibullin.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,16 +22,34 @@ import java.util.stream.Collectors;
 @Builder
 public class RestaurantDto {
 
+    @NotNull
     private Long id;
-    private String name;
-    private Map<Cuisine, Double> cuisineRatings;
-    private Double generalRating;
-    private Price price;
-    private String address;
-    private String description;
-    private String imageUrl;
-    private List<DishDto> dishes;
 
+    @NotBlank
+    private String name;
+
+    @NotNull
+    private Map<Cuisine, Double> cuisineRatings;
+
+    private Double generalRating;
+
+    @NotNull
+    private Price price;
+
+    @NotBlank
+    private String address;
+
+    private Double latitude;
+
+    private Double longitude;
+
+    @NotBlank
+    private String description;
+
+    @NotBlank
+    private String imageUrl;
+
+    private List<DishDto> dishes;
     public static Restaurant to(RestaurantDto dto) {
         return Restaurant.builder()
                 .id(dto.getId())

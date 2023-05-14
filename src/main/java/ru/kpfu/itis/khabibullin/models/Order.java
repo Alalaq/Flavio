@@ -1,7 +1,6 @@
 package ru.kpfu.itis.khabibullin.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,27 +26,22 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @NotNull
     @Column(nullable = false, name = "date")
     private LocalDateTime date;
 
-    @NotNull
     @Column(nullable = false, precision = 10, scale = 2, name = "total")
     private int total;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @NotNull
     private User user;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "state")
     private StateOfOrder state;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    @NotNull
     private Restaurant restaurant;
 
     @ManyToMany

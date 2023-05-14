@@ -1,7 +1,6 @@
 package ru.kpfu.itis.khabibullin.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +24,10 @@ import java.util.Map;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "restaraunt_id")
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column(name = "name", nullable = false)
-    @NotBlank(message = "Name is required")
     private String name;
 
     @Column(name = "general_rating", columnDefinition = "numeric(5,2)")
@@ -52,8 +50,13 @@ public class Restaurant {
     private Map<Cuisine, Double> cuisineRatings = new HashMap<>();
 
     @Column(name = "address", nullable = false)
-    @NotBlank(message = "Address is required")
     private String address;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
 
     @Column(name = "description", nullable = false)
     private String description;

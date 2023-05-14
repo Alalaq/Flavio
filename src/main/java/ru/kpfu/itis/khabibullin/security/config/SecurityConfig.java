@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringRequestMatchers("/addresses/**", "/restaurants/**", "/restaurant/**", "/restaurants/filtered", "/api/users/**", "/verify-email/**",  "/error", "/dishes/**", "/cart", "/process-payment", "/create-charge", "/charge", "/orders/**", "/review/**", "/reviews/**")
                         .and()
                         .authorizeHttpRequests()
+                        .requestMatchers("/test").permitAll()
                         .requestMatchers("/homepage", "/login", "/registration", "/restaurants", "/auth/check-authentication", "/verify-email/**", "/error", "/").permitAll()
                         .requestMatchers("/profile/**", "/logout", "/restaurants/**", "/cart", "/restaurant/**", "/process-payment", "/payment-success", "/dishes/**", "/orders/**","/addresses/**", "/getCurrentUserId", "/review/**", "/reviews/**").authenticated()
                         .requestMatchers("/admin-page", "/api/users/**").hasAuthority("ADMIN")

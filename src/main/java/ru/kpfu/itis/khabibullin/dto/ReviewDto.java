@@ -1,5 +1,8 @@
 package ru.kpfu.itis.khabibullin.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,11 +21,23 @@ import java.util.stream.Collectors;
 @Builder
 public class ReviewDto {
     private Long id;
+
+    @NotNull
     private Long userId;
+
+    @NotNull
     private Long restaurantId;
+
+    @NotNull
     private Long orderId;
+
+    @NotNull
     private String comment;
+
+    @Min(value = 1)
+    @Max(value = 5)
     private int rating;
+
     private Dish dish;
 
     public static Review to(ReviewDto dto) {

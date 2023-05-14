@@ -7,6 +7,7 @@ import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.models.Restaurant;
 import ru.kpfu.itis.khabibullin.repositories.RestaurantsRepository;
 import ru.kpfu.itis.khabibullin.services.RestaurantService;
+import ru.kpfu.itis.khabibullin.utils.API.AddressUtil;
 import ru.kpfu.itis.khabibullin.utils.enums.Cuisine;
 import ru.kpfu.itis.khabibullin.utils.enums.Price;
 
@@ -27,7 +28,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<RestaurantDto> getAllRestaurantsByFilters(Set<Cuisine> cuisines, Set<Price> price, Integer distance, String address, Double rating) {
-        return RestaurantDto.from(restaurantsRepository.findByFilters(cuisines, price, distance, address, rating));
+        AddressUtil.Coordinates coordinates = AddressUtil.getCoordinates(address);
+        return RestaurantDto.from(restaurantsRepository.findByFilters(cuisines, price, distance, rating, coordinates.longitude(), coordinates.latitude()));
     }
 
     @Override
@@ -65,6 +67,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public void save(RestaurantDto restaurant){
         //TODO: something with image idk
+        AddressUtil.Coordinates coordinates = AddressUtil.getCoordinates(restaurant.getAddress());
+        restaurant.setLatitude(coordinates.latitude());
+        restaurant.setLongitude(coordinates.longitude());
         restaurantsRepository.save(RestaurantDto.to(restaurant));
     }
 }

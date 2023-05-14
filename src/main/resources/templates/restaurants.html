@@ -20,11 +20,8 @@
     <div sec:authorize="isAuthenticated()">
         <label for="address-dropdown"></label>
         <select id="address-dropdown" name="address-dropdown">
-            <option selected>Choose an address</option>
-            <option value="saved-addresses">Saved Addresses</option>
         </select>
     </div>
-
     <nav>
         <ul>
             <li sec:authorize="!isAuthenticated()"><a href="/registration">Sign up</a></li>
@@ -100,22 +97,27 @@
     <div class="restaurant-list">
         <h2>Restaurants</h2>
         <div class="restaurant-list">
-            <div class="restaurant-row">
-                <div th:each="restaurant : ${restaurants}" class="restaurant-item">
-                    <div class="restaurant">
-                        <img class="restaurant-image" th:src="@{'/static/images/' + ${restaurant.id} + '.jpg'}" alt="Restaurant Image">
-                        <h3><a th:href="@{/restaurants/{name}(name=*{restaurant.name})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
-                        <p><strong>Rating:</strong> <span th:text="*{restaurant.getGeneralRating()}"></span></p>
-                        <p><strong>Cuisines Rating:</strong> <span th:text="*{restaurant.getCuisineRatings()}"></span></p>
-                        <p><strong>Address:</strong> <span th:text="*{restaurant.getAddress()}"></span></p>
-                        <p><strong>Description:</strong> <span th:text="*{restaurant.getDescription()}"></span></p>
-                        <p><strong>Price:</strong> <span th:text="*{restaurant.price}"></span></p>
+            <th:block th:if="${restaurants.size() == 0}">
+                <h1>No restaurants found by your query. Try something else.</h1>
+            </th:block>
+            <th:block th:if="${restaurants.size() > 0}">
+                <div class="restaurant-row">
+                    <div th:each="restaurant : ${restaurants}" class="restaurant-item">
+                        <div class="restaurant">
+                            <img class="restaurant-image" th:src="@{'/static/images/' + ${restaurant.id} + '.jpg'}" alt="Restaurant Image">
+                            <h3><a th:href="@{/restaurants/{name}(name=*{restaurant.name})}" th:text="${restaurant.name}">Restaurant Name</a></h3>
+                            <p><strong>Rating:</strong> <span th:text="*{restaurant.getGeneralRating()}"></span></p>
+                            <p><strong>Cuisines Rating:</strong> <span th:text="*{restaurant.getCuisineRatings()}"></span></p>
+                            <p><strong>Address:</strong> <span th:text="*{restaurant.getAddress()}"></span></p>
+                            <p><strong>Description:</strong> <span th:text="*{restaurant.getDescription()}"></span></p>
+                            <p><strong>Price:</strong> <span th:text="*{restaurant.price}"></span></p>
+                        </div>
+                        <th:block th:if="${(restaurant.id + 1) % 3 == 0}"/>
                     </div>
-                    <th:block th:if="${(restaurant.id + 1) % 3 == 0}"/>
-                </div><div class="restaurant-row">
-            </div>
-            </div>
+                </div>
+            </th:block>
         </div>
+
     </div>
 
 

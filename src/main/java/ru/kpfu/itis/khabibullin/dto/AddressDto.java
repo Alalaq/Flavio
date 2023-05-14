@@ -1,5 +1,7 @@
 package ru.kpfu.itis.khabibullin.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,10 +20,19 @@ import java.util.stream.Collectors;
 @Builder
 public class AddressDto {
     private Long id;
+    @NotBlank
     private String streetName;
+
+    @NotBlank
     private String homeNumber;
+
+    @NotBlank
     private String city;
+
+    @NotBlank
     private String country;
+
+    @NotNull
     private Long userId;
 
     public static Address to(AddressDto dto) {

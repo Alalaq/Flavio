@@ -1,32 +1,31 @@
--- Restaurants data
-INSERT INTO restaurants (name, general_rating, price, address, description)
-VALUES ('The Hungry Bear', null, '$$', 'Tverskaya st. 1, Moscow',
+INSERT INTO restaurants (name, general_rating, price, address, latitude, longitude, description)
+VALUES ('The Hungry Bear', null, '', 'Tverskaya st. 1, Moscow', 55.762725, 37.609160,
         'The Hungry Bear is a cozy restaurant with a wide range of dishes. It is famous for its burgers and delicious desserts.'),
-       ('La Bella Vita', null, '$$$', 'Nevsky Prospekt 2, St. Petersburg',
+       ('La Bella Vita', null, '$$$', 'Nevsky Prospekt 2, St. Petersburg', 59.934280, 30.335098,
         'La Bella Vita is an upscale Italian restaurant with a romantic atmosphere. The menu includes a variety of traditional Italian dishes, and the wine list is extensive.'),
-       ('Golden Dragon', null, '$$', 'Bauman st. 10, Kazan',
+       ('Golden Dragon', null, '', 'Bauman st. 10, Kazan', 55.794590, 49.111677,
         'Golden Dragon is a Chinese restaurant that also serves Japanese and Korean cuisine. The menu includes a variety of noodles, dumplings, and stir-fries.'),
-       ('Le Chat Noir', null, '$$$', 'Gorky st. 1, Nizhny Novgorod',
+       ('Le Chat Noir', null, '', 'Gorky st. 1, Nizhny Novgorod', 56.323904, 44.002267,
         'Le Chat Noir is a French restaurant that also serves Italian and Russian cuisine. The atmosphere is elegant and romantic, and the menu includes a variety of classic French dishes.'),
-       ('The Red Dragon', null, '$', 'Lenin st. 5, Ekaterinburg',
+       ('The Red Dragon', null, '$', 'Lenin st. 5, Ekaterinburg', 56.832893, 60.606272,
         'The Red Dragon is a casual Chinese restaurant with a laid-back atmosphere. The menu includes a variety of rice and noodle dishes, as well as soups and appetizers.'),
-       ('Mamma Mia', null, '$$', 'Lenina st. 2, Novosibirsk',
+       ('Mamma Mia', null, '$$', 'Lenina st. 2, Novosibirsk', 55.033242, 82.920430,
         'Mamma Mia is an Italian restaurant that also serves American and Mexican cuisine. The menu includes a variety of pizzas, pastas, and burgers.'),
-       ('The Golden Phoenix', null, '$$$', 'Leningradskaya st. 10, Samara',
+       ('The Golden Phoenix', null, '', 'Leningradskaya st. 10, Samara', 53.196489, 50.126556,
         'The Golden Phoenix is a Chinese restaurant that also serves Japanese and Korean cuisine. The menu includes a variety of dim sum, sushi, and Korean barbecue.'),
-       ('The Kazan Kitchen', null, '$', 'Kremlevskaya st. 1, Kazan',
+       ('The Kazan Kitchen', null, '$', 'Kremlevskaya st. 1, Kazan', 55.796391, 49.106991,
         'The Kazan Kitchen offers traditional Tatar cuisine in a modern setting. The menu includes dishes such as chak-chak and echpochmak, as well as Russian favorites like borscht.'),
-       ('Mangal', null, '$$$', 'Gogol st. 10, Kazan',
+       ('Mangal', null, '', 'Gogol st. 10, Kazan', 55.796636, 49.118358,
         'Mangal is a high-end Turkish restaurant with an extensive wine list. The menu includes a variety of kebabs and mezze, as well as grilled seafood.'),
-       ('Soul Kitchen', null, '$$', 'Bauman st. 5, Kazan',
+       ('Soul Kitchen', null, '$$', 'Bauman st. 5, Kazan', 55.794900, 49.115583,
         'Soul Kitchen is a cozy cafe that serves healthy, organic food. The menu includes vegetarian and vegan options, as well as smoothies and juices.'),
-       ('Chez Michel', null, '$$$', 'Pushkin st. 1, Moscow',
+       ('Chez Michel', null, '$$$', 'Pushkin st. 1, Moscow', 55.785275, 49.118883,
         'Chez Michel is a French restaurant that offers a modern take on classic dishes. The atmosphere is elegant and sophisticated.'),
-       ('The Spicy Noodle', null, '$', 'Kirova st. 5, Kazan',
+       ('The Spicy Noodle', null, '$', 'Kirova st. 5, Kazan', 55.791430, 49.105884,
         'The Spicy Noodle is a casual Asian restaurant that specializes in noodles and dumplings. The menu includes both Chinese and Japanese options.'),
-       ('Mamma Roma', null, '$$', 'Kremlevskaya st. 10, Kazan',
+       ('Mamma Roma', null, '$$', 'Kremlevskaya st. 10, Kazan', 55.793095, 49.116574,
         'Mamma Roma is an Italian restaurant that specializes in pizza and pasta. The menu includes a variety of traditional Italian dishes.'),
-       ('The Ottoman Empire', null, '$', 'Kremlevskaya st. 15, Kazan',
+       ('The Ottoman Empire', null, '$', 'Kremlevskaya st. 15, Kazan', 55.794335, 49.114598,
         'The Ottoman Empire is a Turkish restaurant that offers a fusion of Ottoman and Mediterranean cuisine. The atmosphere is luxurious and the service is impeccable.');
 
 
@@ -109,26 +108,26 @@ CREATE OR REPLACE TRIGGER update_restaurant_rating_trigger
     FOR EACH ROW
 EXECUTE FUNCTION update_restaurant_rating();
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-DO
-$$
-    DECLARE
-        i INTEGER := 2;
-    BEGIN
-        WHILE i <= 11
-            LOOP
-                INSERT INTO account (username, password, email, phone_number, birthday, role, state_of_user)
-                VALUES ('user' || i,
-                        crypt('password' || i, gen_salt('bf')),
-                        'user' || i || '@example.com',
-                        '123-456-7890',
-                        DATE '1990-01-01' + (random() * (DATE '2000-12-31' - DATE '1990-01-01') + 1)::integer,
-                        'USER',
-                        'CONFIRMED');
-                i := i + 1;
-            END LOOP;
-    END
-$$;
+-- CREATE EXTENSION IF NOT EXISTS pgcrypto;
+-- DO
+-- $$
+--     DECLARE
+--         i INTEGER := 2;
+--     BEGIN
+--         WHILE i <= 11
+--             LOOP
+--                 INSERT INTO account (username, password, email, phone_number, birthday, role, state_of_user)
+--                 VALUES ('user' || i,
+--                         crypt('password' || i, gen_salt('bf')),
+--                         'user' || i || '@example.com',
+--                         '123-456-7890',
+--                         DATE '1990-01-01' + (random() * (DATE '2000-12-31' - DATE '1990-01-01') + 1)::integer,
+--                         'USER',
+--                         'CONFIRMED');
+--                 i := i + 1;
+--             END LOOP;
+--     END
+-- $$;
 
 -- Dishes data (for Hungry bear only for now)
 INSERT INTO dishes (name, cuisine, description, price, restaurant_id, is_vegetarian, image_url)
@@ -224,10 +223,14 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
 -- Create a trigger to call the update_restaurant_cuisine_rating function
-CREATE TRIGGER review_trigger
+CREATE or replace TRIGGER review_trigger
     AFTER INSERT OR UPDATE ON reviews
     FOR EACH ROW
 EXECUTE FUNCTION update_restaurant_cuisine_rating();
+
+-- CREATE EXTENSION IF NOT EXISTS cube;
+--
+-- CREATE EXTENSION IF NOT EXISTS earthdistance;
+
 

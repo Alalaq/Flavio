@@ -3,6 +3,8 @@ package ru.kpfu.itis.khabibullin.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +25,25 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 public class OrderDto {
+    @NotNull
     private Long id;
+
+    @NotNull
     private LocalDateTime date;
+
+    @Positive
     private int total;
+
+    @NotNull
     private Long userId;
+
+    @NotNull
     private Long restaurantId;
+
+    @NotNull
     private List<CartDishDto> dishes;
+
+    @NotNull
     private StateOfOrder state;
 
     public OrderDto(String json) throws JsonProcessingException {

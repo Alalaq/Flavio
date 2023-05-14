@@ -1,9 +1,6 @@
 package ru.kpfu.itis.khabibullin.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,17 +27,12 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
-    @NotBlank(message = "Username is required")
     private String username;
 
     @Column(name = "password", nullable = false)
-    @NotBlank(message = "Password must be not blank")
-    @Size(min = 6, max = 100, message = "Password length must be between 6 and 100 characters")
     private String hashPassword;
 
     @Column(name = "email", nullable = false, unique = true)
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email must be a valid email address")
     private String email;
 
     @Column(name = "phone_number")

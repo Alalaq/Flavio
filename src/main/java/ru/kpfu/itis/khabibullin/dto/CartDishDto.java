@@ -1,5 +1,6 @@
 package ru.kpfu.itis.khabibullin.dto;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,30 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class CartDishDto {
+    @NotNull
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String description;
+
+    @NotBlank
     private String cuisine;
+
+    @NotNull
+    @Positive
     private BigDecimal price;
+
+    @NotNull
     private Long restaurantId;
+
+    @NotNull
+    @PositiveOrZero
     private int quantity;
+
+    @NotBlank
     private String imageUrl;
 
     public static Dish toDish(CartDishDto dishDto){

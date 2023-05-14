@@ -1,5 +1,9 @@
 package ru.kpfu.itis.khabibullin.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,15 +23,33 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 public class DishDto {
+    @NotNull
     private Long id;
+
+    @NotBlank
     private String name;
-    private String cuisine;
+
+    @NotBlank
     private String description;
+
+    @NotBlank
+    private String cuisine;
+
+    @NotNull
+    @Positive
     private BigDecimal price;
+
+    @NotNull
     private Long restaurantId;
+
+    @NotNull
+    @PositiveOrZero
+    private int quantity;
+
+    @NotBlank
+    private String imageUrl;
     private List<Long> reviewIds;
     private boolean isVegetarian;
-    private String imageUrl;
 
     //TODO: handle case with null reviews
     public static DishDto from(Dish dish) {
