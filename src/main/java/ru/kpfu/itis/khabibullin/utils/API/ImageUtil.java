@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -44,7 +47,9 @@ public class ImageUtil {
         try (Response response = client.newCall(request).execute()) {
 
             if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
+                IOException e = new IOException("Unexpected code " + response);
+                handleException(e);
+                throw e;
             }
 
             String responseBody = Objects.requireNonNull(response.body()).string();

@@ -32,6 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -52,6 +55,7 @@ public class CartController {
             try {
                 dishes = (new ObjectMapper().readValue(decodedOrderCookie, OrderDto.class)).getDishes();
             } catch (JsonProcessingException e) {
+                handleException(e);
                 throw new RuntimeException(e);
             }
         }
@@ -108,6 +112,7 @@ public class CartController {
             currentOrderCookie.setPath("/");
             response.addCookie(currentOrderCookie);
         } catch (JsonProcessingException | IllegalAccessException e) {
+            handleException(e);
             throw new RuntimeException(e);
         }
 

@@ -15,6 +15,9 @@ import ru.kpfu.itis.khabibullin.utils.enums.StateOfOrder;
 
 import java.security.Principal;
 import java.util.List;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -38,6 +41,7 @@ public class ProfileRestController {
         try {
             return DtoToJsonConverter.toJsonStringUsingToString(orders);
         } catch (JsonProcessingException | IllegalAccessException e) {
+            handleException(e);
             throw new RuntimeException(e);
         }
     }
@@ -70,6 +74,8 @@ public class ProfileRestController {
 
         AddressDto addressToDelete = addressService.getAddressById(addressId);
         if (!addressToDelete.getUserId().equals(currentUserId)) {
+
+            handleException(new AccessDeniedException("You are not authorized to delete this address"));
             throw new AccessDeniedException("You are not authorized to delete this address");
         }
 

@@ -19,6 +19,9 @@ import ru.kpfu.itis.khabibullin.exceptions.IllegalAddressException;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -63,14 +66,18 @@ public class AddressUtil {
             double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return EARTH_RADIUS * c;
         } else {
-            throw new IllegalAddressException("Wrong address");
+            IllegalAddressException e = new IllegalAddressException("Wrong address");
+            handleException(e);
+            throw e;
         }
     }
 
 
     public static Coordinates getCoordinates(String address) {
         if (address == null || address.isEmpty()) {
-            throw new IllegalArgumentException("Address cannot be null or empty");
+            IllegalArgumentException e = new IllegalArgumentException("Address cannot be null or empty");
+            handleException(e);
+            throw e;
         }
 
         if (coordinatesCache.asMap().containsKey(address)) {

@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.khabibullin.models.User;
 import ru.kpfu.itis.khabibullin.repositories.UsersRepository;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -22,7 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = usersRepository.findUserByUsername(username).orElse(null);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            UsernameNotFoundException e = new UsernameNotFoundException("User not found");
+            handleException(e);
+            throw e;
         }
 
         return new UserDetailsImpl(user);

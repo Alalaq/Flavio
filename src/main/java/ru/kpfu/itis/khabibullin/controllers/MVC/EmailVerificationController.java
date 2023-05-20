@@ -9,6 +9,9 @@ import ru.kpfu.itis.khabibullin.dto.UpdatedUserDto;
 import ru.kpfu.itis.khabibullin.exceptions.NotFoundException;
 import ru.kpfu.itis.khabibullin.services.UserService;
 import ru.kpfu.itis.khabibullin.utils.enums.State;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -25,7 +28,8 @@ public class EmailVerificationController {
             userService.updateUser(user);
 
             return "redirect:/login";
-        } catch (NotFoundException notFoundException){
+        } catch (NotFoundException e){
+            handleException(e);
             return "redirect:/error";
         }
 

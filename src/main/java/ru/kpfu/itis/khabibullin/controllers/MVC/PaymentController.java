@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+
+import static ru.kpfu.itis.khabibullin.aspects.ExceptionHandler.handleException;
+
 /**
  * @author Khabibullin Alisher
  */
@@ -43,7 +46,7 @@ public class PaymentController {
                 try {
                     order = new OrderDto(decodedCurrentOrderCookie);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    handleException(e);
                 }
             }
             model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
@@ -65,7 +68,7 @@ public class PaymentController {
                     currentOrder = new ObjectMapper().readValue(currentOrderJson, OrderDto.class);
                     System.out.println(currentOrder);
                 } catch (JsonProcessingException e) {
-                    e.printStackTrace();
+                    handleException(e);
                 }
             }
             model.addAttribute("order", currentOrder);
@@ -93,7 +96,7 @@ public class PaymentController {
             try {
                 currentOrder = new ObjectMapper().readValue(currentOrderJson, OrderDto.class);
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                handleException(e);
             }
         }
 

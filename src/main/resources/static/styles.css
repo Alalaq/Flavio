@@ -587,7 +587,7 @@ select option:hover {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    position: center;
+    position: absolute;
     font-size: 16px;
     margin: 10px 0;
     cursor: pointer;
@@ -1128,7 +1128,6 @@ input[type="hidden"] {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 20px;
-    width: 700px;
 }
 
 .dishes-card {
@@ -1143,6 +1142,14 @@ input[type="hidden"] {
     height: 410px;
     margin-right: 12px;
     box-shadow: 0px 1px 25px 1px #888;
+}
+
+.dishes-card-list-item {
+    display: inline-block;
+    width: 290px; /* Adjust the width as needed */
+    margin: 10px;
+    vertical-align: top;
+    box-sizing: border-box;
 }
 
 .dishes-card h3 {
@@ -1190,6 +1197,7 @@ input[type="hidden"] {
 }
 .dishes-card-list{
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
 }
 
