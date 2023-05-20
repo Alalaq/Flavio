@@ -10,9 +10,18 @@ services:
     depends_on:
       - database
     environment:
+      - SPRING_PROFILES_ACTIVE=debug
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/flavio_db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=qW*RK909
+      - SPRING_DATASOURCE_USERNAME_FILE=/run/secrets/database_username
+      - SPRING_DATASOURCE_PASSWORD_FILE=/run/secrets/database_password
+      - MAIL_HOST_FILE=/run/secrets/mail_host
+      - MAIL_PORT_FILE=/run/secrets/mail_port
+      - MAIL_USERNAME_FILE=/run/secrets/mail_username
+      - MAIL_FROM_ADDRESS_FILE=/run/secrets/mail_from_address
+      - MAIL_PASSWORD_FILE=/run/secrets/mail_password
+      - SERVER_PORT=8080
+      - STRIPE_API_KEY_FILE=/run/secrets/stripe_api_key
+      - STRIPE_PUBLIC_KEY_FILE=/run/secrets/stripe_public_key
     networks:
       - cloud
     logging:
@@ -20,6 +29,16 @@ services:
       options:
         max-file: "5"
         max-size: "10m"
+    secrets:
+      - database_username
+      - database_password
+      - mail_host
+      - mail_port
+      - mail_username
+      - mail_from_address
+      - mail_password
+      - stripe_api_key
+      - stripe_public_key
 
   database:
     image: postgres
@@ -28,8 +47,8 @@ services:
       - "5431:5432"
     user: postgres
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=qW*RK909
+      - POSTGRES_USER_FILE=/run/secrets/database_username
+      - POSTGRES_PASSWORD_FILE=/run/secrets/database_password
       - POSTGRES_DB=flavio_db
     volumes:
       - postgres_volume:/var/lib/postgresql/data
@@ -41,11 +60,34 @@ services:
         max-file: "5"
         max-size: "10m"
     command: ["postgres", "-c", "fsync=off", "-c", "synchronous_commit=off"]
+    secrets:
+      - database_username
+      - database_password
 
+secrets:
+  database_username:
+    file: ./secrets/database_username.txt
+  database_password:
+    file: ./secrets/database_password.txt
+  mail_host:
+    file: ./secrets/mail_host.txt
+  mail_port:
+    file: ./secrets/mail_port.txt
+  mail_username:
+    file: ./secrets/mail_username.txt
+  mail_from_address:
+    file: ./secrets/mail_from_address.txt
+  mail_password:
+    file: ./secrets/mail_password.txt
+  stripe_api_key:
+    file: ./secrets/stripe_api_key.txt
+  stripe_public_key:
+    file: ./secrets/stripe_public_key.txt
 
 volumes:
   postgres_volume:
     external: true
+
 networks:
   cloud:
     external: true
